@@ -1,0 +1,114 @@
+#!/usr/bin/env python
+
+# This script may be run multiple times.  Everything in the script needs to
+# work even when it's already been run.
+
+from __future__ import division, print_function
+
+import argparse
+from fnmatch import fnmatch
+import os
+import re
+import subprocess
+import sys
+
+
+SYSTEMS_DIR = '/config/systems'
+
+DESCRIPTION = "Configure or reconfigure a system"
+
+def parse_args():
+    parser = argparse.ArgumentParser(description=DESCRIPTION)
+    parser.add_argument('-k', dest='generate_keys', action='store_true',
+            help="Generate new keys (e.g. ssh) for a fresh install")
+    parser.add_argument('-s', dest='short', action='store_true',
+            help="Short mode: omit slow stuff like network requests")
+    parser.add_argument('-y', dest='yes', action='store_true',
+            help="Proceed without asking for confirmation")
+    parser.add_argument('hostname', nargs='?',
+            help="New hostname (fully-qualified domain name) to be set")
+
+    args = parser.parse_args()
+    return args
+
+def replace(pattern, repl, filename):
+    """Perform the equivalent of `sed s/pattern/repl/ filename`."""
+    with open(filename) as f:
+        lines = [re.sub(pattern, repl, line) for line in f]
+    with open(filename, 'w') as f:
+        for line in lines:
+            f.write(line)
+
+def set_hostname(hostname):
+    """Set the system's hostname to the given value.
+
+    This sets the hostname both temporarily (/proc/sys/kernel/hostname)
+    and permanently (/etc/sysconfig/network and /etc/hosts).
+    """
+    subprocess.check_call(('hostname', hostname))
+    replace(r'^(HOSTNAME=).*$', r'\g<1>' + hostname, '/etc/sysconfig/network')
+
+    short = hostname.split('.')[0]
+    new_entries = hostname
+    if hostname != short:
+        new_entries += ' %s' % short
+    # Save everything up to the first entry as \1 and non-greedy match to
+    # the first occurrence of "localhost", which is saved as \3.
+    replace(r'^((127.0.0.1|::1)\s+).*?(localhost)',
+            r'\g<1> %s \g<3>' % new_entries,
+            '/etc/hosts')
+
+def system_dirs(hostname):
+    """Yields directories in the SYSTEMS_DIR which match the given hostname.
+
+    Each directory name is interpreted as a glob pattern.
+    """
+    short = hostname.split('.')[0]
+
+    for dirname in sorted(os.listdir(SYSTEMS_DIR)):
+        if fnmatch(short, dirname) or fnmatch(hostname, dirname):
+            yield os.path.join(SYSTEMS_DIR, dirname)
+
+def system_scripts(hostname):
+    """Yields a sorted sequence of scripts that match the given hostname.
+
+    The sorting order is determined primarily by the alphanumerical order
+    of filenames and secondarily by the matching order of the containing
+    systems directories.  Non-executable files are omitted.
+    """
+    all_scripts = []
+    for sys_dir in system_dirs(hostname):
+        scripts_dir = os.path.join(sys_dir, 'scripts.d')
+        for filename in sorted(os.listdir(scripts_dir)):
+            all_scripts.append((filename, scripts_dir))
+    all_scripts.sort()
+
+    for filename, scripts_dir in all_scripts:
+        full_path = os.path.join(scripts_dir, filename)
+        if os.access(full_path, os.X_OK):
+            yield full_path
+
+
+args = parse_args()
+
+if args.hostname:
+    hostname = args.hostname
+    print('About to change the hostname to %s and configure.' % hostname)
+else:
+    with open('/proc/sys/kernel/hostname') as f:
+        hostname = f.read().strip()
+    print('About to configure without changing the hostname.')
+if not args.yes:
+    raw_input('Press enter to continue or CTRL-C to cancel: ')
+
+set_hostname(hostname)
+
+raw_args = sys.argv[1:]
+for script in system_scripts(hostname):
+    subprocess.call([script] + raw_args)
+
+print()
+print('System configuration is complete.')
+print('You may possibly need to reboot to make some changes take effect.')
+
+# vim: et sw=4 sts=4
