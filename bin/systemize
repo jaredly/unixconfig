@@ -88,8 +88,8 @@ def profile_list(hostname):
     filename = os.path.join(SYSTEMS_DIR, matches[-1])
 
     profiles = []
-    with open(filename) as line:
-        for line in filename:
+    with open(filename) as f:
+        for line in f:
             line = line.strip()
             if line and not line.startswith('#'):
                 profiles.append(line)
@@ -136,6 +136,7 @@ else:
 
 raw_args = sys.argv[1:]
 for script in profile_scripts(hostname):
+    print('Running:', script, ' '.join(raw_args))
     subprocess.call([script] + raw_args)
 
 print()
