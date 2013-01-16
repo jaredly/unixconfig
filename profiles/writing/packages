@@ -1,0 +1,46 @@
+%packages --ignoremissing
+
+# Writing Tools
+# Note: the texlive-release package adds the following repository to yum:
+# http://jnovy.fedorapeople.org/texlive/2012/packages.fc17/
+texlive-release
+texlive
+texlive-collection-documentation-english
+texlive-collection-fontsrecommended
+texlive-collection-latexextra
+texlive-collection-mathextra
+tex-latex
+tex-biblatex
+tex-biblatex-doc
+tex-biblatex-ieee
+tex-custom-bib
+tex-custom-bib-doc
+tex-epstopdf
+tex-hypernat
+tex-multirow
+tex-oberdiek
+tex-pdfjam
+tex-pgf-doc
+tex-pgfplots
+tex-pgfplots-doc
+tex-siunitx
+tex-siunitx-doc
+tex-subfig-doc
+tex-tocbibind
+dia
+gnuplot
+graphviz
+gv
+kile
+rubber
+sil-gentium-fonts
+sil-gentium-alt-fonts
+sil-gentium-basic-book-fonts
+sil-gentium-basic-fonts
+sil-gentium-basic-fonts-common
+texmaker
+xfig
+xpdf
+Zim
+
+%end
