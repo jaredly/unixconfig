@@ -1,0 +1,20 @@
+%packages --ignoremissing
+
+# Codecs and RPM Fusion stuff
+ffmpeg
+gstreamer-ffmpeg
+gstreamer-plugins-good
+gstreamer-plugins-bad
+gstreamer-plugins-ugly
+lame
+mpg321
+mplayer
+gnome-mplayer
+mencoder
+vlc
+xmms-mp3
+xine-ui
+#xine-lib-extras-freeworld
+libdvdcss
+
+%end

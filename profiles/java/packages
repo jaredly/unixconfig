@@ -1,0 +1,16 @@
+# AML PACKAGES
+#
+# NOTE: components are groups of packages
+# components are defined in /repos/fedora/7/i386/os/repodata/comps-f7.xml
+# Specify packages by name (not the id). If they are an optional package within
+# a component, put them after the component (i.e. a line after "@ component")
+
+%packages --ignoremissing
+
+@ eclipse
+
+eclipse
+eclipse-cdt
+eclipse-pydev
+
+%end

@@ -1,0 +1,161 @@
+# AML PACKAGES
+#
+# NOTE: components are groups of packages
+# components are defined in /repos/fedora/7/i386/os/repodata/comps-f7.xml
+# Specify packages by name (not the id). If they are an optional package within
+# a component, put them after the component (i.e. a line after "@ component")
+
+%packages --ignoremissing
+
+@ base-x
+@ core
+@ development-libs
+@ development-tools
+@ fedora-packager
+@ fonts
+@ hardware-support
+@ libreoffice
+@ multimedia
+@ printing
+@ standard
+@ virtualization
+
+# Desktop environments
+@ cinnamon-desktop
+@ gnome-desktop
+@ lxde-desktop
+@ mate-desktop
+@ xfce-desktop
+
+# Remove mlocate, whose indexing causes occasional severe slowdowns.
+- mlocate
+
+# System tools
+syslinux
+kernel-doc
+ldd-pdf
+memtest86+
+livecd-tools
+spin-kickstarts
+fedpkg
+rpmdevtools
+rpmlint
+qemu-kvm
+virt-manager
+libvirt
+tunctl
+wine
+dracut-network
+sysstat
+ddrescue
+fedora-release-rawhide
+lightdm-gtk
+# Workaround for bug #785817
+kdebase-workspace
+ethtool
+acpi
+btrfs-progs
+zsh
+
+# UNIX Tools
+bash-completion
+xbindkeys
+lynx
+irssi
+ncftp
+xorg-x11-xinit-session
+xorg-x11-apps
+htop
+iotop
+iftop
+collectl
+lm_sensors
+nethogs
+tftp
+enscript
+pssh
+pdftk
+#pdfjam
+cowsay
+socat
+ack
+tmux
+
+# Basic Development tools
+vim-enhanced
+vim-X11
+emacs
+subversion
+git-all
+git-daemon
+gitg
+bzr
+mercurial
+ddd
+pyglet
+trac
+trac-git-plugin
+
+# C/C++ Libraries
+ElectricFence
+wxGTK-devel
+gsl-devel
+xorg-x11-server-sdk
+ImageMagick-c++-devel
+libffi-devel
+tix-devel
+valgrind-devel
+
+# Other Programming Languages
+octave
+perl-Error
+plt-scheme
+R
+
+# Fonts
+sil-gentium-fonts
+sil-gentium-alt-fonts
+sil-gentium-basic-book-fonts
+sil-gentium-basic-fonts
+sil-gentium-basic-fonts-common
+
+# Applications
+#inkscape
+#inkscape-docs
+gnumeric
+audacity
+geeqie
+gnome-games
+bsd-games
+epiphany
+epiphany-extensions
+wireshark
+wireshark-gnome
+nspluginwrapper
+padevchooser
+redhat-lsb
+gnome-device-manager
+#chromium
+google-chrome-stable
+avidemux-gtk
+avidemux-cli
+wv
+# Note that abiword is useful for converting word docs to text.
+abiword
+okular
+xpdf
+Zim
+
+# GNOME Usability
+gconf-editor
+dconf-editor
+gnome-tweak-tool
+gnome-shell-extension-remove-accessibility-icon
+# Alt-TAB by window instead of by application:
+gnome-shell-extension-alternate-tab
+# Provide a power off option:
+gnome-shell-extensions-alternative-status-menu
+# Better layout of thumbnails
+gnome-shell-extensions-native-window-placement
+
+%end
