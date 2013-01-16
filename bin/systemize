@@ -13,7 +13,7 @@ import subprocess
 import sys
 
 
-SYSTEMS_DIR = '/config/systems'
+SYSTEMS_DIRS = ['/config/systems', '/admin/systems']
 
 DESCRIPTION = "Configure or reconfigure a system"
 
@@ -58,32 +58,45 @@ def set_hostname(hostname):
             r'\g<1> %s \g<3>' % new_entries,
             '/etc/hosts')
 
-def system_dirs(hostname):
-    """Yields directories in the SYSTEMS_DIR which match the given hostname.
+    try:
+        subprocess.call(['hostnamectl', 'set-hostname', hostname])
+    except OSError:
+        # It's okay for hostnamectl to not exist (Fedora 17 and earlier)
+        pass
 
-    Each directory name is interpreted as a glob pattern.
+def system_dir(hostname):
+    """Returns the directory in "systems" which matches the given hostname.
+
+    Each directory name is interpreted as a glob pattern.  The longest
+    matching directory name (i.e., the most "specific" pattern) is returned.
     """
     short = hostname.split('.')[0]
 
-    for dirname in sorted(os.listdir(SYSTEMS_DIR)):
+    for dirname in SYSTEMS_DIRS:
+        if os.path.exists(dirname):
+            systems_dir = dirname
+    else:
+        raise RuntimeError('No valid systems directory')
+
+    matches = []
+    for dirname in sorted(os.listdir(systems_dir)):
         if fnmatch(short, dirname) or fnmatch(hostname, dirname):
-            yield os.path.join(SYSTEMS_DIR, dirname)
+            matches.append(dirname)
+
+    matches.sort(key=lambda x: len(x))
+    return os.path.join(systems_dir, matches[-1])
 
 def system_scripts(hostname):
     """Yields a sorted sequence of scripts that match the given hostname.
 
-    The sorting order is determined primarily by the alphanumerical order
-    of filenames and secondarily by the matching order of the containing
-    systems directories.  Non-executable files are omitted.
+    The sorting order is determined by the alphanumerical order of filenames.
+    Non-executable files are omitted.
     """
-    all_scripts = []
-    for sys_dir in system_dirs(hostname):
-        scripts_dir = os.path.join(sys_dir, 'scripts.d')
-        for filename in sorted(os.listdir(scripts_dir)):
-            all_scripts.append((filename, scripts_dir))
-    all_scripts.sort()
+    sys_dir = system_dir(hostname)
+    scripts_dir = os.path.join(sys_dir, 'scripts.d')
+    all_scripts = sorted(os.listdir(scripts_dir))
 
-    for filename, scripts_dir in all_scripts:
+    for filename in all_scripts:
         full_path = os.path.join(scripts_dir, filename)
         if os.access(full_path, os.X_OK):
             yield full_path
@@ -101,7 +114,15 @@ else:
 if not args.yes:
     raw_input('Press enter to continue or CTRL-C to cancel: ')
 
-set_hostname(hostname)
+# We call `set_hostname` even when keeping the old hostname in order to
+# ensure that config files are all up to date.
+if re.match(r'^[a-zA-Z0-9-.]+$', hostname):
+    set_hostname(hostname)
+elif args.hostname:
+    print('Error: invalid hostname "%s". Exiting.' % hostname)
+    sys.exit(-1)
+else:
+    print('Warning: invalid hostname "%s".' % hostname)
 
 raw_args = sys.argv[1:]
 for script in system_scripts(hostname):
