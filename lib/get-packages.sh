@@ -5,8 +5,8 @@ echo
 echo "** Beginning the script $0"
 echo
 
-configdir="$(dirname "$0")/../../.."
-packagesdir="$(dirname "$0")/../packages.d"
+configdir="$(dirname "$0")/../.."
+packagesfile="$(dirname "$0")/packages"
 
 while getopts "ksy" options
 do
@@ -33,5 +33,5 @@ fi
 
 ##############################################################################
 # Install packages for this system.
-"$configdir/bin/yumkick.py" -y $extra_opts "$packagesdir"/*
+"$configdir/bin/yumkick" -y $extra_opts "$packagesfile"
 
