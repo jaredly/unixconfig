@@ -1,1 +1,3 @@
+%packages --ignoremissing
 google-chrome-stable
+%end
