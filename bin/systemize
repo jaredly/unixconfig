@@ -13,7 +13,14 @@ import subprocess
 import sys
 
 
-SYSTEMS_DIRS = ['/config/systems', '/admin/systems']
+for dirname in ['/config', '/admin']:
+    if os.path.exists(dirname):
+        CONFIG_DIR = dirname
+        break
+else:
+    raise RuntimeError('No valid systems directory')
+SYSTEMS_DIR = os.path.join(CONFIG_DIR, 'systems')
+PROFILES_DIR = os.path.join(CONFIG_DIR, 'profiles')
 
 DESCRIPTION = "Configure or reconfigure a system"
 
@@ -64,42 +71,45 @@ def set_hostname(hostname):
         # It's okay for hostnamectl to not exist (Fedora 17 and earlier)
         pass
 
-def system_dir(hostname):
-    """Returns the directory in "systems" which matches the given hostname.
+def profile_list(hostname):
+    """Returns the profile list in "systems" which matches the given hostname.
 
     Each directory name is interpreted as a glob pattern.  The longest
     matching directory name (i.e., the most "specific" pattern) is returned.
     """
     short = hostname.split('.')[0]
 
-    for dirname in SYSTEMS_DIRS:
-        if os.path.exists(dirname):
-            systems_dir = dirname
-    else:
-        raise RuntimeError('No valid systems directory')
-
     matches = []
-    for dirname in sorted(os.listdir(systems_dir)):
-        if fnmatch(short, dirname) or fnmatch(hostname, dirname):
-            matches.append(dirname)
+    for filename in sorted(os.listdir(SYSTEMS_DIR)):
+        if fnmatch(short, filename) or fnmatch(hostname, filename):
+            matches.append(filename)
 
     matches.sort(key=lambda x: len(x))
-    return os.path.join(systems_dir, matches[-1])
+    filename = os.path.join(SYSTEMS_DIR, matches[-1])
 
-def system_scripts(hostname):
+    profiles = []
+    with open(filename) as line:
+        for line in filename:
+            line = line.strip()
+            if line and not line.startswith('#'):
+                profiles.append(line)
+
+    return profiles
+
+def profile_scripts(hostname):
     """Yields a sorted sequence of scripts that match the given hostname.
 
     The sorting order is determined by the alphanumerical order of filenames.
     Non-executable files are omitted.
     """
-    sys_dir = system_dir(hostname)
-    scripts_dir = os.path.join(sys_dir, 'scripts.d')
-    all_scripts = sorted(os.listdir(scripts_dir))
+    for profile in profile_list(hostname):
+        profile_dir = os.path.join(PROFILES_DIR, profile)
 
-    for filename in all_scripts:
-        full_path = os.path.join(scripts_dir, filename)
-        if os.access(full_path, os.X_OK):
-            yield full_path
+        all_files = sorted(os.listdir(profile_dir))
+        for filename in all_files:
+            full_path = os.path.join(profile_dir, filename)
+            if os.access(full_path, os.X_OK):
+                yield full_path
 
 
 args = parse_args()
@@ -125,7 +135,7 @@ else:
     print('Warning: invalid hostname "%s".' % hostname)
 
 raw_args = sys.argv[1:]
-for script in system_scripts(hostname):
+for script in profile_scripts(hostname):
     subprocess.call([script] + raw_args)
 
 print()
