@@ -1,20 +1,37 @@
 %packages --ignoremissing
 
 # Codecs and RPM Fusion stuff
+audacity
+avidemux-cli
+avidemux-gtk
+ddrescue
 ffmpeg
+gmpc
+gnome-mplayer
 gstreamer-ffmpeg
-gstreamer-plugins-good
 gstreamer-plugins-bad
+gstreamer-plugins-bad-extras
+gstreamer-plugins-base
+gstreamer-plugins-good
 gstreamer-plugins-ugly
 lame
+libdvdcss
+libdvdnav
+libdvdread
+libquicktime
+libquicktime-utils
+libXvMC
+lombard
+mencoder
 mpg321
 mplayer
-gnome-mplayer
-mencoder
+pitivi
 vlc
-xmms-mp3
+xine
+xine-lib
+xine-lib-extras
+xine-lib-extras-nonfree
 xine-ui
-#xine-lib-extras-freeworld
-libdvdcss
+xmms-mp3
 
 %end

@@ -7,90 +7,98 @@
 
 %packages --ignoremissing
 
-@ base-x
+###############################################################################
+# Core Packages, Services, and System Administration
+
 @ core
-@ development-libs
-@ development-tools
-@ fedora-packager
-@ fonts
 @ hardware-support
-@ libreoffice
-@ multimedia
-@ printing
 @ standard
-@ virtualization
 
-# Desktop environments
-@ cinnamon-desktop
-@ gnome-desktop
-@ lxde-desktop
-@ mate-desktop
-@ xfce-desktop
-
-# Remove mlocate, whose indexing causes occasional severe slowdowns.
-- mlocate
-
-# System tools
-syslinux
-kernel-doc
-ldd-pdf
-memtest86+
-livecd-tools
-spin-kickstarts
-fedpkg
-rpmdevtools
-rpmlint
-qemu-kvm
-virt-manager
-libvirt
-tunctl
-wine
-dracut-network
-sysstat
-ddrescue
-fedora-release-rawhide
-lightdm-gtk
-# Workaround for bug #785817
-kdebase-workspace
-ethtool
 acpi
 btrfs-progs
+dracut-network
+ethtool
+gdisk
+lm_sensors
+memtest86+
+# Remove mlocate, whose indexing causes occasional severe slowdowns.
+- mlocate
+ntfs-3g
+redhat-lsb
+syslinux
+sysstat
+tunctl
+
+# Services
+autofs
+openvpn
+- sendmail
+ssmtp
+
+###############################################################################
+# Command-line Tools
+
+# Tools and Shells
+ack
+bash-completion
+collectl
+cowsay
+ddrescue
+hardlink
+htop
+iftop
+iotop
+nethogs
+nmap
+pssh
+screen
+socat
+tcpdump
+tmux
+wireshark
+wireshark-gnome
 zsh
 
-# UNIX Tools
-bash-completion
-xbindkeys
-lynx
+# Text Internet Applications
+elinks
 irssi
+lynx
 ncftp
-xorg-x11-xinit-session
-xorg-x11-apps
-htop
-iotop
-iftop
-collectl
-lm_sensors
-nethogs
 tftp
-enscript
-pssh
-pdftk
-#pdfjam
-cowsay
-socat
-ack
-tmux
+w3m
 
-# Basic Development tools
+# RPM/Fedora Tools
+@ fedora-packager
+fedora-release-rawhide
+fedpkg
+livecd-tools
+rpmdevtools
+rpmlint
+spin-kickstarts
+yum-plugin-downloadonly
+
+###############################################################################
+# Development
+
+@ development-libs
+@ development-tools
+
+# Text Editors
+emacs
 vim-enhanced
 vim-X11
-emacs
-subversion
+
+# Version Control
+bzr
 git-all
+git-cola
 git-daemon
 gitg
-bzr
 mercurial
+subversion
+
+# Basic Development tools
+ghex
 ddd
 pyglet
 trac
@@ -106,50 +114,47 @@ libffi-devel
 tix-devel
 valgrind-devel
 
-# Other Programming Languages
+# Programming Languages
 octave
 perl-Error
 plt-scheme
 R
 
+# Linux Kernel Documentation
+kernel-doc
+ldd-pdf
+
+###############################################################################
+# X Windows and Desktop Environments
+
+@ base-x
+@ printing
+
+# Desktop environments
+@ cinnamon-desktop
+@ gnome-desktop
+@ lxde-desktop
+@ mate-desktop
+@ xfce-desktop
+
+# X Windows
+lightdm-gtk
+xbindkeys
+xorg-x11-xinit-session
+xorg-x11-apps
+
 # Fonts
+@ fonts
 sil-gentium-fonts
 sil-gentium-alt-fonts
 sil-gentium-basic-book-fonts
 sil-gentium-basic-fonts
 sil-gentium-basic-fonts-common
 
-# Applications
-#inkscape
-#inkscape-docs
-gnumeric
-audacity
-geeqie
-gnome-games
-bsd-games
-epiphany
-epiphany-extensions
-wireshark
-wireshark-gnome
-nspluginwrapper
-padevchooser
-redhat-lsb
-gnome-device-manager
-#chromium
-google-chrome-stable
-avidemux-gtk
-avidemux-cli
-wv
-# Note that abiword is useful for converting word docs to text.
-abiword
-okular
-xpdf
-Zim
-
 # GNOME Usability
 gconf-editor
 dconf-editor
-gnome-tweak-tool
+gnome-device-manager
 gnome-shell-extension-remove-accessibility-icon
 # Alt-TAB by window instead of by application:
 gnome-shell-extension-alternate-tab
@@ -157,5 +162,71 @@ gnome-shell-extension-alternate-tab
 gnome-shell-extensions-alternative-status-menu
 # Better layout of thumbnails
 gnome-shell-extensions-native-window-placement
+gnome-tweak-tool
+padevchooser
+
+# Virtualization and WINE
+@ virtualization
+qemu-kvm
+libvirt
+virt-manager
+wine
+
+###############################################################################
+# Graphical Applications
+
+@ libreoffice
+@ multimedia
+
+# Office Applications
+# Note that abiword is useful for converting word docs to text.
+abiword
+gnumeric
+
+# Graphical Internet Applications
+epiphany
+epiphany-extensions
+firefox
+nspluginwrapper
+nx
+transmission
+transmission-daemon
+transmission-gtk
+transmission-remote-cli
+transmission-remote-gtk
+unison213
+unison227
+unison240
+
+# Games and Educational
+bsd-games
+childsplay
+frozen-bubble
+gcompris
+gnome-games
+PySolFC
+PySolFC-cardsets
+stellarium
+tuxpaint
+
+# Graphics Applications
+digikam
+digikam-doc
+geeqie
+gimp
+gimp-help
+ImageMagick
+inkscape
+inkscape-docs
+kipi-plugins
+rawtherapee
+
+# PDF and Postscript Viewers and Tools
+enscript
+okular
+#pdfjam
+pdftk
+wv
+xpdf
 
 %end
