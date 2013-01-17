@@ -86,8 +86,9 @@ def parse_file(f):
 def write_remove_command(f, remove_list):
     """Writes a yum command to a file to remove a list of packages."""
 
-    command = ['remove'] + ['"{}"'.format(p) for p in remove_list]
-    print >>f, ' '.join(command)
+    if remove_list:
+        command = ['remove'] + ['"{}"'.format(p) for p in remove_list]
+        print >>f, ' '.join(command)
 
 def write_install_command(f, install_list, remove_list):
     """Writes a yum command to a file to install from package lists.
