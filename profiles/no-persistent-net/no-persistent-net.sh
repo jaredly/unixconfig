@@ -18,3 +18,6 @@ rm -f /etc/sysconfig/network-scripts/ifcfg-*.old
 # Get rid of biosdevname-based net config files that might have slipped in.
 rm -f /etc/sysconfig/network-scripts/ifcfg-em*
 rm -f /etc/sysconfig/network-scripts/ifcfg-p*
+
+# Remove any HWADDR lines in ifcfg-*
+sed -i '/^HWADDR/d' /etc/sysconfig/network-scripts/ifcfg-*
