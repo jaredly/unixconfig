@@ -1,10 +1,6 @@
 #!/bin/bash
 # Add repositories and install packages.
 
-echo
-echo "** Beginning the script $0"
-echo
-
 configdir="$(dirname "$0")/../.."
 packagesfile="$(dirname "$0")/packages"
 

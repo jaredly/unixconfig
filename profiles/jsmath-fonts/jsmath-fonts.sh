@@ -1,9 +1,5 @@
 #!/bin/bash
 
-echo
-echo "** Beginning the script $0"
-echo
-
 while getopts "ksy" options
 do
     case $options in

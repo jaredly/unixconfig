@@ -3,10 +3,6 @@
 # break loose if you switch ethernet cards between boots (at the cost of
 # some minor inconvenience for machines with two ethernet cards).
 
-echo
-echo "** Beginning the script $0"
-echo
-
 rm -f /etc/udev/rules.d/*persistent-net*
 
 # Mask the persistent net generator rule.
