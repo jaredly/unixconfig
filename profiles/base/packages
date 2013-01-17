@@ -28,6 +28,8 @@ redhat-lsb
 syslinux
 sysstat
 tunctl
+# Remove clipit, its dumb and as its stupid splash says its a security risk
+- clipit
 
 # Services
 autofs
