@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo
+echo "** Beginning the script $0"
+echo
+
 while getopts "ksy" options
 do
     case $options in
@@ -15,20 +19,13 @@ fi
 ##############################################################################
 # RPMFusion Repository
 
-site="http://download1.rpmfusion.org"
-if grep -q Rawhide /etc/redhat-release; then
-    if ! rpm -q rpmfusion-free-release; then
-        rpm -Uvh "$site/free/fedora/rpmfusion-free-release-rawhide.noarch.rpm"
-    fi
-    if ! rpm -q rpmfusion-nonfree-release; then
-        rpm -Uvh "$site/nonfree/fedora/rpmfusion-nonfree-release-rawhide.noarch.rpm"
-    fi
-else
-    if ! rpm -q rpmfusion-free-release; then
-        rpm -Uvh "$site/free/fedora/rpmfusion-free-release-stable.noarch.rpm"
-    fi
-    if ! rpm -q rpmfusion-nonfree-release; then
-        rpm -Uvh "$site/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm"
-    fi
-fi
+# This will read in variables defining the Fedora version.
+. /etc/os-release
 
+site="http://download1.rpmfusion.org"
+if ! rpm -q rpmfusion-free-release; then
+    rpm -Uvh "$site/free/fedora/rpmfusion-free-release-$VERSION_ID.noarch.rpm"
+fi
+if ! rpm -q rpmfusion-nonfree-release; then
+    rpm -Uvh "$site/nonfree/fedora/rpmfusion-nonfree-release-$VERSION_ID.noarch.rpm"
+fi
