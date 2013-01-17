@@ -66,7 +66,9 @@ def set_hostname(hostname):
             '/etc/hosts')
 
     try:
-        subprocess.call(['hostnamectl', 'set-hostname', hostname])
+        hostnamectl = ['hostnamectl', 'set-hostname']
+        subprocess.call(hostnamectl + ['--static', '--transient',  hostname])
+        subprocess.call(hostnamectl + ['--pretty', hostname])
     except OSError:
         # It's okay for hostnamectl to not exist (Fedora 17 and earlier)
         pass
