@@ -117,7 +117,6 @@ valgrind-devel
 # Programming Languages
 octave
 perl-Error
-plt-scheme
 R
 
 # Linux Kernel Documentation
