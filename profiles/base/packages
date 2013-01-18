@@ -28,6 +28,8 @@ redhat-lsb
 syslinux
 sysstat
 tunctl
+# Remove clipit, its dumb and as its stupid splash says its a security risk
+- clipit
 
 # Services
 autofs
@@ -113,6 +115,18 @@ ImageMagick-c++-devel
 libffi-devel
 tix-devel
 valgrind-devel
+boost
+boost-filesystem
+boost-math
+boost-regex
+boost-random
+SDL
+SDL-devel
+SDL_ttf
+SDL_ttf-devel
+ncurses
+ncurses-devel
+ctags
 
 # Programming Languages
 octave
