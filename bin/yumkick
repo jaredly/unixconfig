@@ -117,7 +117,7 @@ def main():
         write_install_command(f, install, remove)
         print >>f, 'run'
         f.flush()
-        yum_command = ['yum', 'shell']
+        yum_command = ['yum', 'shell', '--skip-broken']
         if args.assumeyes:
             yum_command.append('--assumeyes')
         if args.extra:
