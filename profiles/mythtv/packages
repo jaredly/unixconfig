@@ -5,6 +5,10 @@ ivtv-firmware
 mysql
 mysql-server
 
+# Apache
+httpd
+mod_ssl
+
 # MythTV
 mytharchive
 mythbrowser
