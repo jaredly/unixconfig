@@ -22,7 +22,7 @@ extra_opts=""
 if [[ -d /mnt/mirrors/fedora ]]; then
     extra_opts="--extra-arg=--disablerepo=fedora --extra-arg=--disablerepo=updates
         --extra-arg=--enablerepo=local-fedora --extra-arg=--enablerepo=local-updates"
-elif wget --spider -q http://kwik-e-mart/releases/; then
+elif wget --spider -q http://kwik-e-mart:8080/releases/; then
     extra_opts="--extra-arg=--disablerepo=fedora --extra-arg=--disablerepo=updates
         --extra-arg=--enablerepo=kwik-fedora --extra-arg=--enablerepo=kwik-updates"
 fi
