@@ -16,7 +16,7 @@ echo "Bin Directory"
 symlink config/bin "$HOME/bin"
 
 echo "Dotfiles Directory"
-for ref in "$HOME/config"/dotfiles/* "$HOME/secret/irssi"
+for ref in "$HOME/config"/dotfiles/*
 do
     path="$HOME/.$(basename $ref)"
     echo "Creating link $path => $ref"

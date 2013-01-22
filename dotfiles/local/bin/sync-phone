@@ -1,0 +1,5 @@
+
+cd ~/Documents/G2x/
+hg pull -u
+hg push
+

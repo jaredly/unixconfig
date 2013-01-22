@@ -1,0 +1,213 @@
+" Andrew McNabb's vimrc
+
+""" TODO: look at ftplugin-overrule """
+
+call pathogen#infect()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Use Vim settings, rather then Vi settings (usually better).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+" Highlight match while typing search pattern
+set incsearch
+
+" Allow lower case to match upper case search targets.
+set smartcase
+
+" Show vim commands in the status bar as they're being typed
+set showcmd
+
+set shell=/bin/zsh
+
+set pastetoggle=<F3>
+
+" Force UTF-8.
+set termencoding=utf-8
+
+" Improve smoothness of redrawing for fast connections, etc.
+set ttyfast
+
+" Briefly jump to the open paren when the matching close paren is typed.
+set showmatch
+" How long to show the matching paren.
+set matchtime=1
+
+" Completion for ex command-line
+set wildmenu
+set wildmode=longest:full,full
+
+" Get rid of the Vim intro screen
+set shortmess+=I
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Colors
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+    syntax on
+    set hlsearch
+endif
+
+" Color Scheme
+set bg=light
+colorscheme mine
+"colorscheme delek
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Key Mappings
+
+" Clear out those blasted search highlights with F2.
+nmap <F2> :nohl<cr><C-L>
+
+" Spell Checking
+"nmap <F12> :w!<cr>:!aspell -x check %<cr>:e!<cr>
+nmap <F12> :set invspell<cr>
+
+" ReST editing stuff
+function ReST_Extend_Line()
+    let cur = getline(".")
+    let prev = getline( line(".") - 1 )
+    return repeat(cur[0], len(prev) - len(cur))
+endfunction
+imap <F9> <c-r>=ReST_Extend_Line()<cr>
+map <F9> yypVr
+
+" Turn off stupid mouse stuff.
+"set mouse=a
+":map <mouseup> <nop>
+":map! <mouseup> <nop>
+":map <mousedown> <nop>
+":map! <mousedown> <nop>
+
+" Disable motion keys in insert mode
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
+" Also disable delete key in insert mode
+imap <del> <nop>
+
+" Don't use Ex mode.
+map Q <nop>
+
+" Make p in Visual mode replace the selected text with the "" register.
+vnoremap p <Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>
+" This is an alternative that also works in block mode, but the deleted
+" text is lost and it only works for putting the current register.
+"vnoremap p "_dp
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fold Settings (note that files will default to all folds being open)
+set foldenable
+set foldlevelstart=0
+set foldopen=block,hor,jump,mark,percent,quickfix,search,tag,undo
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Default File Settings
+
+set autoindent
+set backspace=indent,eol
+set ignorecase
+
+" blank lines at bottom and top of screen
+set scrolloff=2
+
+" split lines at a convenient point
+"set linebreak
+
+" show line and column number in the status bar
+set ruler
+
+set nosmartindent
+set smarttab
+
+" For all files set 'textwidth' to 78 characters.
+set textwidth=78
+
+" Set default format options
+"default: formatoptions="tcq"
+set formatoptions=cql
+
+let g:detectindent_preferred_expandtab = 1
+let domainname = substitute(system("hostname -d"),"\n","","g")
+if domainname == "corp.google.com"
+    " Use 2 spaces when you hit the tab key.
+    set et sw=2 sts=2
+    let g:detectindent_preferred_indent = 2
+else
+    " Use 4 spaces when you hit the tab key.
+    set et sw=4 sts=4
+    let g:detectindent_preferred_indent = 4
+endif
+"no stupid tab-space mixing in indents
+set shiftround
+autocmd BufReadPost <buffer> DetectIndent
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Filetype specific settings
+" Enable file type detection.
+" Use the default filetype settings, so that mail gets 'tw' set to 72,
+" 'cindent' is on in C files, etc.
+" Also load indent files, to automatically do language-dependent indenting.
+filetype plugin indent on
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Makefile Settings
+autocmd FileType make setlocal noet sw=8 sts=8
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Python Settings
+
+" Close foldlevels 1 and greater by default (jpythonfold.vim is in ftplugins)
+autocmd FileType python setlocal foldlevel=1
+
+" default formatoptions is tcq
+autocmd FileType mail setlocal formatoptions=tcqbl
+autocmd FileType mail setlocal tw=72
+autocmd FileType mail setlocal iskeyword+=-
+
+autocmd FileType html setlocal formatoptions=tql
+" This needs to happen after the indent plugin does its thing.  (how?)
+"autocmd FileType html set indentexpr=
+
+"autocmd FileType python setlocal et sw=4 sts=4
+
+autocmd BufNewFile *.py .!cat ~/.vim/skel.py
+
+au BufNewFile,BufRead *.rst set sw=2
+
+au BufNewFile,BufRead *.pbj set filetype=python
+
+map <C-p> :tabprevious<CR>
+map <C-j> :tabnew<CR>
+inoremap <C-j> :tabnew<CR>
+map <C-n> :tabnext<CR>
+inoremap <C-Left> <C-O>:tabprevious<CR>
+inoremap <C-Right> <C-O>:tabnext<CR>
+map <Leader>s :%s/\s\+$//g<CR>
+
+hi Folded ctermbg=none
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Modeline (potentially dangerous)
+
+set modeline
+
+map <Leader>f :NERDTreeToggle<CR>
+" vim: ts=8

@@ -1,0 +1,77 @@
+#
+# .zshrc is sourced in interactive shells.
+# It should contain commands to set up aliases,
+# functions, options, key bindings, etc.
+#
+
+autoload -U compinit
+compinit
+
+#allow tab completion in the middle of a word
+setopt COMPLETE_IN_WORD
+
+export PS1="${WINDOW}:%~$ "
+
+## keep background processes at full speed
+#setopt NOBGNICE
+## restart running processes on exit
+#setopt HUP
+
+## history
+#setopt APPEND_HISTORY
+## for sharing history between zsh processes
+#setopt INC_APPEND_HISTORY
+#setopt SHARE_HISTORY
+
+## never ever beep ever
+#setopt NO_BEEP
+
+## automatically decide when to page a list of completions
+#LISTMAX=0
+
+## disable mail checking
+#MAILCHECK=0
+
+# autoload -U colors
+#colors
+#
+
+preexec () {
+    if [[ $WINDOW != "" ]];then
+        echo -ne "\ek${PWD/*\//}\e\\"
+    fi
+}
+
+alias ls='ls --color=auto -F'
+alias lsd='ls -ld *(-/DN)'
+alias lsa='ls -ld .*'
+
+bindkey -v
+
+export PATH=$PATH:~/.local/bin
+export PYTHONPATH=$PYTHONPATH:~/python
+
+alias gits="git status|grep 'modified:\|deleted:'"
+alias gitsn="git status|grep 'Changed but not updated:' -A 1000|grep 'modified:\|deleted:'"
+alias gitn="git status|grep 'Untracked files:' -A 1000|grep ^#$'\t'|sed -e 's/^#\t//'"
+alias gitca="git commit -am"
+alias gitc="git commit -m"
+alias gitd='git diff'
+
+alias hs='hg st'
+alias hc='hg commit -m'
+alias hd='hg diff'
+alias hp='hg pull -u'
+
+_make_pbj() {                     
+    local a
+    read -l a
+    reply=(`./make.pbj --list "$a"`)
+}
+compctl -K _make_pbj ./make.pbj
+alias pbj="./make.pbj"
+PATH="/usr/local/heroku/bin:$PATH"
+export JAVA_HOME=/usr/lib/jvm/java
+
+. ~/.nvm/nvm.sh 2>&/dev/null
+nvm use 0.9.5
