@@ -1,0 +1,31 @@
+# Files List for Fedora Mirror
+#
+# From the rsync man page:
+#
+# "As the list of files/directories to transfer is built, rsync checks
+# each name to be transferred against the list of include/exclude patterns
+# in turn, and the first matching pattern is acted on."
+#
+# So if both an include pattern and an exclude pattern match, then the
+# exclude pattern should be listed first.
+
+- debug/**
+- iso/**
+- SRPMS/**
+- Live/**
+
+- /releases/14/**
+- /releases/15/**
+- /releases/16/**
++ /releases/***
+
+- /updates/14/**
+- /updates/15/**
+- /updates/16/**
+- /updates/testing/**
++ /updates/***
+
++ /development/***
+
+# Exclude anything not explicitly included.
+- *
