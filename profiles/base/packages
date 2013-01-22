@@ -33,6 +33,8 @@ tunctl
 
 # Services
 autofs
+httpd
+mod_ssl
 openvpn
 - sendmail
 ssmtp
@@ -199,7 +201,6 @@ gnumeric
 # Graphical Internet Applications
 epiphany
 epiphany-extensions
-evolution
 firefox
 nspluginwrapper
 nx
