@@ -113,11 +113,11 @@ def main():
         install += file_install
         remove += file_remove
     with tempfile.NamedTemporaryFile() as f:
-        write_remove_command(f, remove)
         write_install_command(f, install, remove)
+        write_remove_command(f, remove)
         print >>f, 'run'
         f.flush()
-        yum_command = ['yum', 'shell']
+        yum_command = ['yum', 'shell', '--skip-broken']
         if args.assumeyes:
             yum_command.append('--assumeyes')
         if args.extra:

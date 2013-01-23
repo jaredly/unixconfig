@@ -1,0 +1,6 @@
+[local-fedora]
+name=Local Mirror of Fedora
+baseurl=file:///mnt/mirrors/fedora/releases/$releasever/Everything/$basearch/os/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$basearch

@@ -1,0 +1,6 @@
+[local-updates]
+name=Local Mirror of Fedora Updates
+baseurl=file:///mnt/mirrors/fedora/updates/$releasever/$basearch/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$basearch

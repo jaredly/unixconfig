@@ -1,0 +1,6 @@
+[kwik-updates]
+name=Kwik-E-Mart Mirror of Fedora Updates
+baseurl=http://kwik-e-mart:8080/updates/$releasever/$basearch/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$basearch
