@@ -35,6 +35,7 @@ tunctl
 autofs
 httpd
 mod_ssl
+mod_wsgi
 openvpn
 - sendmail
 ssmtp
