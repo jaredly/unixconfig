@@ -14,6 +14,7 @@
 @ hardware-support
 @ standard
 
+abrt-cli
 acpi
 btrfs-progs
 dracut-network
