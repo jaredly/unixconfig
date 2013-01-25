@@ -17,11 +17,13 @@
 - /releases/14/**
 - /releases/15/**
 - /releases/16/**
+- /releases/17/**
 + /releases/***
 
 - /updates/14/**
 - /updates/15/**
 - /updates/16/**
+- /updates/17/**
 - /updates/testing/**
 + /updates/***
 
