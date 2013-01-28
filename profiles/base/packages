@@ -99,6 +99,7 @@ git-all
 git-cola
 git-daemon
 gitg
+gitk
 mercurial
 subversion
 
