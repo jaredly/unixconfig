@@ -100,6 +100,7 @@ git-all
 git-cola
 git-daemon
 gitg
+gitk
 mercurial
 subversion
 
@@ -180,7 +181,7 @@ gnome-shell-extensions-alternative-status-menu
 # Better layout of thumbnails
 gnome-shell-extensions-native-window-placement
 gnome-tweak-tool
-padevchooser
+pavucontrol
 
 # Virtualization and WINE
 @ virtualization
