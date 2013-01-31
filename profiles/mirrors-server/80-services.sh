@@ -13,6 +13,5 @@ disable_service() {
     /sbin/service $1 stop
 }
 
-enable_service xinetd
 enable_service nginx
 
