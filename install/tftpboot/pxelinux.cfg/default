@@ -1,0 +1,78 @@
+# Andrew's PXELINUX Configuration
+
+default vesamenu.c32
+
+label x86_64-rescue
+    menu label Fedora x86_64 Rescue
+    kernel f18-x86_64/vmlinuz
+    append initrd=f18-x86_64/initrd.img ip=dhcp rescue
+
+    text help
+
+    Enter the Fedora f18-x86_64 Installer in Rescue mode.
+    endtext
+
+
+label i386-rescue
+    menu label Fedora i386 Rescue
+    kernel f18-i386/vmlinuz
+    append initrd=f18-i386/initrd.img ip=dhcp rescue
+
+    text help
+
+    Enter the Fedora f18-i386 Installer in Rescue mode.
+    endtext
+
+
+label x86_64
+    menu label Install Fedora x86_64 Interactively
+    kernel f18-x86_64/vmlinuz
+    append initrd=f18-x86_64/initrd.img ip=dhcp repo=http://mirrors:8080/releases/18/Fedora/x86_64/os
+
+    text help
+
+    Install Fedora f18-x86_64 interactively.
+    endtext
+
+
+label i386
+    menu label Install Fedora i386 Interactively
+    kernel f18-i386/vmlinuz
+    append initrd=f18-i386/initrd.img ip=dhcp repo=http://mirrors:8080/releases/18/Fedora/i386/os
+
+    text help
+
+    Install Fedora f18-i386 interactively.
+    endtext
+
+
+label memtest86+
+    menu label Memtest86+
+    kernel memtest86+
+
+    text help
+
+    Run Memtest86+.
+    endtext
+
+label wipedisk
+    menu label Wipe the Hard Disk!
+    kernel f18-i386/vmlinuz
+    append initrd=f18-i386/initrd.img repo=http://mirrors/fedora/releases/18/Fedora/i386/os ks=http://kickstart/install/wipedisk.ks ksdevice=bootif sshd
+    ipappend 2
+    # From the kickstart documentation:
+    # BOOTIF command line option will be used to locate the boot interface.
+    # BOOTIF is automagically supplied by pxelinux when you include the option
+    # 'IPAPPEND 2' in your pxelinux.cfg file
+    # Also note that the sshd option makes Anaconda start an ssh daemon for
+    # remote access during the installation process.
+
+    text help
+
+    Wipe the hard disk!
+    This is inherently dangerous!  Be careful!
+    endtext
+
+# Timeout in tenths of a second.
+#timeout 300
+#prompt 0
