@@ -58,7 +58,7 @@ label memtest86+
 label wipedisk
     menu label Wipe the Hard Disk!
     kernel f18-i386/vmlinuz
-    append initrd=f18-i386/initrd.img repo=http://mirrors/fedora/releases/18/Fedora/i386/os ks=http://kickstart/install/wipedisk.ks ksdevice=bootif sshd
+    append initrd=f18-i386/initrd.img repo=http://mirrors/fedora/releases/18/Fedora/i386/os ks=http://kickstart/wipedisk.ks ksdevice=bootif sshd
     ipappend 2
     # From the kickstart documentation:
     # BOOTIF command line option will be used to locate the boot interface.
