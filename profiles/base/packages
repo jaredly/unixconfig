@@ -81,7 +81,6 @@ livecd-tools
 rpmdevtools
 rpmlint
 spin-kickstarts
-yum-plugin-downloadonly
 
 ###############################################################################
 # Development
