@@ -11,12 +11,13 @@ set -e
 
 mountpoint="/mnt/mirrors"
 device="LABEL=MIRRORS"
+didmount=""
 
 if [[ ! -d /mnt/mirrors/fedora ]]; then
         echo "Mirror at /mnt/mirrors/fedora is unavailable.  Mounting..."
         mkdir -p "$mountpoint"
         mount "$device" "$mountpoint"
-        didmount=true
+        didmount="true"
 fi
 
 if [[ ! -d /mnt/mirrors/fedora ]]; then
@@ -30,7 +31,7 @@ rsync -vaH --partial --filter=". mirror-fedora.txt" \
     rsync://mirrors.cs.byu.edu/fedora/ "$mountpoint/fedora"
 
 # unmount if it was unmounted before
-if [[ -z "$didmount" ]]; then
+if [[ ! -z "$didmount" ]]; then
     echo "Unmounting"
     umount "$mountpoint" || echo "Couldn't unmount."
 fi
