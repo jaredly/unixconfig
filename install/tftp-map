@@ -1,0 +1,4 @@
+# Normally, tftp is chrooted, but this means that symlinks don't work.  This
+# map has the effect of returning files from /aml/admin/install but without
+# breaking symlinks.
+r ^.*$ /config/install/tftpboot/\0

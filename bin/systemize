@@ -13,12 +13,7 @@ import subprocess
 import sys
 
 
-for dirname in ['/config', '/admin']:
-    if os.path.exists(dirname):
-        CONFIG_DIR = dirname
-        break
-else:
-    raise RuntimeError('No valid systems directory')
+CONFIG_DIR = '/config'
 SYSTEMS_DIR = os.path.join(CONFIG_DIR, 'systems')
 PROFILES_DIR = os.path.join(CONFIG_DIR, 'profiles')
 

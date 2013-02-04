@@ -14,6 +14,7 @@
 @ hardware-support
 @ standard
 
+abrt-cli
 acpi
 btrfs-progs
 dracut-network
@@ -35,6 +36,7 @@ tunctl
 autofs
 httpd
 mod_ssl
+mod_wsgi
 openvpn
 - sendmail
 ssmtp
@@ -79,7 +81,6 @@ livecd-tools
 rpmdevtools
 rpmlint
 spin-kickstarts
-yum-plugin-downloadonly
 
 ###############################################################################
 # Development
@@ -98,6 +99,7 @@ git-all
 git-cola
 git-daemon
 gitg
+gitk
 mercurial
 subversion
 
@@ -178,7 +180,7 @@ gnome-shell-extensions-alternative-status-menu
 # Better layout of thumbnails
 gnome-shell-extensions-native-window-placement
 gnome-tweak-tool
-padevchooser
+pavucontrol
 
 # Virtualization and WINE
 @ virtualization
