@@ -21,5 +21,4 @@ sed -i '/^HWADDR/d' /etc/sysconfig/network-scripts/ifcfg-*
 #Fix the cmdline
 sed -e '/+=.*biosdevname/d' /etc/default/grub
 echo "GRUB_CMDLINE_LINUX+=\"biosdevname=0\"" >> /etc/default/grub
-grub2-mkconfig -o /boot/grub2/grug.cfg
 
