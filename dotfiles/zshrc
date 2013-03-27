@@ -62,6 +62,7 @@ alias hs='hg st'
 alias hc='hg commit -m'
 alias hd='hg diff'
 alias hp='hg pull -u'
+alias pip='pip-python'
 
 _make_pbj() {                     
     local a
@@ -70,7 +71,10 @@ _make_pbj() {
 }
 compctl -K _make_pbj ./make.pbj
 alias pbj="./make.pbj"
-PATH="/usr/local/heroku/bin:$PATH"
+export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="$PATH:/usr/local/go/bin"
+export GOPATH='/home/jared/clone/go'
+export PATH=$PATH:$GOPATH/bin
 export JAVA_HOME=/usr/lib/jvm/java
 
 . ~/.nvm/nvm.sh 2>&/dev/null

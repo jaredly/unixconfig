@@ -202,6 +202,15 @@ inoremap <C-Left> <C-O>:tabprevious<CR>
 inoremap <C-Right> <C-O>:tabnext<CR>
 map <Leader>s :%s/\s\+$//g<CR>
 
+autocmd FileType coq inoremap <C-l> :IDEToCursor<CR>
+autocmd FileType coq inoremap <C-j> :IDENext<CR>
+autocmd FileType coq inoremap <C-k> :IDEUndo<CR>
+autocmd FileType coq noremap <C-l> :IDEToCursor<CR>
+autocmd FileType coq noremap <C-j> :IDENext<CR>
+autocmd FileType coq noremap <C-k> :IDEUndo<CR>
+autocmd FileType coq noremap <C-k> :IDEUndo<CR>
+highlight SentToCoq ctermbg=none ctermfg=White
+
 hi Folded ctermbg=none
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
