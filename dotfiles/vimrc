@@ -197,6 +197,7 @@ au BufNewFile,BufRead *.pbj set filetype=python
 map <C-p> :tabprevious<CR>
 map <C-j> :tabnew<CR>
 inoremap <C-j> :tabnew<CR>
+noremap <C-t> :tabnew<CR>
 map <C-n> :tabnext<CR>
 inoremap <C-Left> <C-O>:tabprevious<CR>
 inoremap <C-Right> <C-O>:tabnext<CR>
@@ -209,9 +210,13 @@ autocmd FileType coq noremap <C-l> :IDEToCursor<CR>
 autocmd FileType coq noremap <C-j> :IDENext<CR>
 autocmd FileType coq noremap <C-k> :IDEUndo<CR>
 autocmd FileType coq noremap <C-k> :IDEUndo<CR>
-highlight SentToCoq ctermbg=none ctermfg=White
+autocmd FileType coq highlight SentToCoq ctermbg=none ctermfg=White
+
+autocmd FileType go setlocal formatoptions+=cro
 
 hi Folded ctermbg=none
+
+noremap <F1> <nop>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Modeline (potentially dangerous)
