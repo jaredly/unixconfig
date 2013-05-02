@@ -42,7 +42,11 @@ preexec () {
     fi
 }
 
-alias ls='ls --color=auto -F'
+if [[ `uname` == 'Darwin' ]]; then
+    alias ls='ls -GF'
+else
+    alias ls='ls --color=auto -F'
+fi
 alias lsd='ls -ld *(-/DN)'
 alias lsa='ls -ld .*'
 
@@ -50,6 +54,9 @@ bindkey -v
 
 export PATH=$PATH:~/.local/bin
 export PYTHONPATH=$PYTHONPATH:~/python
+
+bindkey ^r history-incremental-search-backward
+setopt hist_ignore_all_dups
 
 alias gits="git status|grep 'modified:\|deleted:'"
 alias gitsn="git status|grep 'Changed but not updated:' -A 1000|grep 'modified:\|deleted:'"
@@ -77,5 +84,16 @@ export GOPATH='/home/jared/clone/go'
 export PATH=$PATH:$GOPATH/bin
 export JAVA_HOME=/usr/lib/jvm/java
 
-. ~/.nvm/nvm.sh 2>&/dev/null
-nvm use 0.9.5
+if [[ `uname` == 'Linux' ]]; then
+    . ~/.nvm/nvm.sh 2>&/dev/null
+    nvm use 0.9.5
+fi
+
+if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch mac
+    [[ -s /Users/jared/.nvm/nvm.sh ]] && . /Users/jared/.nvm/nvm.sh
+    alias fs='foreman start'
+    ### Added by the Heroku Toolbelt
+    export PATH="/usr/local/heroku/bin:$PATH"
+fi
+
+
