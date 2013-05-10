@@ -308,7 +308,7 @@ endfunction
 " The functions for setting colors
 "
 "
-highlight SentToCoq ctermbg=LightGreen guibg=LightGreen
+highlight SentToCoq ctermbg=LightGreen guibg=LightGreen ctermfg=black
 highlight WillSendToCoq ctermbg=Yellow guibg=Yellow
 highlight link CoqTopError Error
 
@@ -1123,7 +1123,7 @@ function s:ShowGoalsInfo()
   call s:ShowInfo(l:info)
   call s:ShowGoals(l:fgbg)
 
-  execute 'set switchbuf = ' . l:saveswb
+  execute 'set switchbuf=' . l:saveswb
   execute l:winsave . 'wincmd w'
   call s:Debug('ShowGoalsInfo', '<<< ShowGoalsInfo()')
 endfunction

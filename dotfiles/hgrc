@@ -5,7 +5,6 @@ color =
 pager =
 hggit =
 hgext.bookmarks =
-histedit = ~/clone/histedit/hg_histedit.py
 
 [pager]
 pager = LESS='FRX' less

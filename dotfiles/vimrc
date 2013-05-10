@@ -210,7 +210,7 @@ autocmd FileType coq noremap <C-l> :IDEToCursor<CR>
 autocmd FileType coq noremap <C-j> :IDENext<CR>
 autocmd FileType coq noremap <C-k> :IDEUndo<CR>
 autocmd FileType coq noremap <C-k> :IDEUndo<CR>
-autocmd FileType coq highlight SentToCoq ctermbg=none ctermfg=White
+autocmd FileType coq highlight SentToCoq ctermbg=none ctermfg=black
 
 autocmd FileType go setlocal formatoptions+=cro
 

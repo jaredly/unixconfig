@@ -62,7 +62,6 @@ alias hs='hg st'
 alias hc='hg commit -m'
 alias hd='hg diff'
 alias hp='hg pull -u'
-alias pip='pip-python'
 
 _make_pbj() {                     
     local a
