@@ -69,7 +69,9 @@ alias hs='hg st'
 alias hc='hg commit -m'
 alias hd='hg diff'
 alias hp='hg pull -u'
-alias pip='pip-python'
+
+alias ll="ls -l"
+
 
 _make_pbj() {                     
     local a
@@ -84,16 +86,25 @@ export GOPATH='/home/jared/clone/go'
 export PATH=$PATH:$GOPATH/bin
 export JAVA_HOME=/usr/lib/jvm/java
 
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 if [[ `uname` == 'Linux' ]]; then
     . ~/.nvm/nvm.sh 2>&/dev/null
     nvm use 0.9.5
 fi
 
 if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch mac
+    export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages
     [[ -s /Users/jared/.nvm/nvm.sh ]] && . /Users/jared/.nvm/nvm.sh
     alias fs='foreman start'
     ### Added by the Heroku Toolbelt
     export PATH="/usr/local/heroku/bin:$PATH"
 fi
 
+. ~/.venv/default/bin/activate
 
+# always run ls after cd
+function chpwd() {
+    emulate -L zsh
+    ls -a
+}
