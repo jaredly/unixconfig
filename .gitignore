@@ -6,3 +6,5 @@
 
 # NFS junk
 .nfs*
+
+dotfiles/emacs.d/elpa/
