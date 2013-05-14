@@ -1,0 +1,63 @@
+
+;; package lists
+
+(require 'package)
+(add-to-list 'package-archives 
+  '("marmalade" .
+    "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+
+;; install my packages =)
+
+(setq my-packages-file "~/.emacs.d/my-packages")
+(load "~/.emacs.d/load-my-packages.el")
+
+;; making ESC do what I want for Evil
+;;   http://stackoverflow.com/questions/8483182/emacs-evil-mode-best-practice
+
+(add-to-list 'load-path "~/.emacs.d/evil")
+(require 'evil)  
+(evil-mode 1)
+(define-key evil-normal-state-map [escape] 'keyboard-quit)
+(define-key evil-visual-state-map [escape] 'keyboard-quit)
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+(require 'projectile)
+(projectile-global-mode)
+
+;; simulating vim tabs
+;;   http://www.emacswiki.org/emacs/Evil
+
+(load "elscreen" "ElScreen" t)
+(define-key evil-normal-state-map (kbd "C-w t") 'elscreen-create) ;creat tab
+(define-key evil-normal-state-map (kbd "C-w x") 'elscreen-kill) ;kill tab
+(define-key evil-normal-state-map (kbd "M-p") 'elscreen-previous) ;previous tab
+(define-key evil-normal-state-map (kbd "M-n") 'elscreen-next) ;next tab
+(load "~/.emacs.d/sublime-theme.el")
+(setq evil-default-cursor t)
+(sublime-text-2)
+
+;; smooth scrolling
+;;   http://www.emacswiki.org/emacs/SmoothScrolling
+    
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1) ;; keyboard scroll one line at a time
+(setq scroll-margin 1
+      scroll-conservatively 0
+      scroll-up-aggressively 0.01
+      scroll-down-aggressively 0.01)
+(setq-default scroll-up-aggressively 0.01
+	      scroll-down-aggressively 0.01)
+
+;; other random stuff
+
+(linum-mode 1)
+(setq-default indent-tabs-mode nil)
+(require 'git-gutter-fringe)

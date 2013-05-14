@@ -97,6 +97,10 @@ if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch m
     alias fs='foreman start'
     ### Added by the Heroku Toolbelt
     export PATH="/usr/local/heroku/bin:$PATH"
+
+    alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
+    alias vi=emacs
+    alias e=emacs
 fi
 
 . ~/.venv/default/bin/activate
