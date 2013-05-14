@@ -88,7 +88,10 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 if [[ `uname` == 'Linux' ]]; then
     . ~/.nvm/nvm.sh 2>&/dev/null
-    nvm use 0.9.5
+    alias emacs='emacsclient -t'
+    alias e=emacs
+    alias vi=emacs
+    alias vim=emacs
 fi
 
 if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch mac
@@ -98,7 +101,7 @@ if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch m
     ### Added by the Heroku Toolbelt
     export PATH="/usr/local/heroku/bin:$PATH"
 
-    alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
+    alias emacs="/Applications/Emacs.app/bin/emacsclient -t"
     alias vi=emacs
     alias e=emacs
 fi

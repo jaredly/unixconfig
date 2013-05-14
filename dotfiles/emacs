@@ -1,3 +1,4 @@
+;; -*- mode: emacs-lisp -*-
 
 ;; package lists
 
@@ -34,7 +35,7 @@
 ;;   http://www.emacswiki.org/emacs/Evil
 
 (load "elscreen" "ElScreen" t)
-(define-key evil-normal-state-map (kbd "C-w t") 'elscreen-create) ;creat tab
+(define-key evil-normal-state-map (kbd "C-w t") 'elscreen-create) ;create tab
 (define-key evil-normal-state-map (kbd "C-w x") 'elscreen-kill) ;kill tab
 (define-key evil-normal-state-map (kbd "M-p") 'elscreen-previous) ;previous tab
 (define-key evil-normal-state-map (kbd "M-n") 'elscreen-next) ;next tab
@@ -61,3 +62,5 @@
 (linum-mode 1)
 (setq-default indent-tabs-mode nil)
 (require 'git-gutter-fringe)
+
+(setq vc-follow-symlinks t)

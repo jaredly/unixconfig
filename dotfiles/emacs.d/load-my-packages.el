@@ -1,16 +1,18 @@
 (defun read-lines (file)
   (with-temp-buffer
-    (message "hellO")
     (insert-file-contents file)
     (split-string
      (buffer-string) "\n" t)
     ))
 
 (defun load-my-packages (file)
+  ; fetch the list of packages available 
+  (when (not package-archive-contents)
+    (package-refresh-contents))
+  ; go through and install packages
   (dolist (pkg (read-lines file))
-    (message (concat "Checking: " pkg))
     (when (not (package-installed-p (intern pkg)))
-               (message (concat "nstalling " pkg))
+               (message (concat "Installing package " pkg))
 	       (package-install (intern pkg)))))
 
 (load-my-packages my-packages-file)
@@ -20,10 +22,11 @@
 (defun add-package-to-my-list (pkg pkglist)
   (with-temp-buffer
     (insert-file-contents pkglist)
-    (point-max)
-    (insert (concat "\n" pkg))
+    (insert (concat pkg "\n"))
     (write-file pkglist)
-    ))
+  ))
 
-(defadvice package-install (after package-install-savepkg)
-  (add-package-to-my-list (ad-get-arg 0) my-packages-file))
+(defadvice package-install (before package-install-savepkg activate)
+  (when (not (package-installed-p (ad-get-arg 0)))
+    (add-package-to-my-list (symbol-name (ad-get-arg 0)) my-packages-file)
+  ))
