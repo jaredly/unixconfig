@@ -85,6 +85,7 @@ export PATH=$PATH:$GOPATH/bin
 export JAVA_HOME=/usr/lib/jvm/java
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+export ALTERNATE_EDITOR=''
 
 if [[ `uname` == 'Linux' ]]; then
     . ~/.nvm/nvm.sh 2>&/dev/null
@@ -101,7 +102,8 @@ if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch m
     ### Added by the Heroku Toolbelt
     export PATH="/usr/local/heroku/bin:$PATH"
 
-    alias emacs="/Applications/Emacs.app/bin/emacsclient -t"
+    alias emacs="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t"
+    alias rvim=/usr/bin/vim
     alias vi=emacs
     alias e=emacs
 fi

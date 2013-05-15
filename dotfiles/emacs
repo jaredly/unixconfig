@@ -15,6 +15,12 @@
 (setq my-packages-file "~/.emacs.d/my-packages")
 (load "~/.emacs.d/load-my-packages.el")
 
+;; simulating vim tabs
+;;   http://www.emacswiki.org/emacs/Evil
+
+(load "elscreen" "ElScreen" t)
+(elscreen-start)
+
 ;; making ESC do what I want for Evil
 ;;   http://stackoverflow.com/questions/8483182/emacs-evil-mode-best-practice
 
@@ -31,14 +37,19 @@
 (require 'projectile)
 (projectile-global-mode)
 
-;; simulating vim tabs
-;;   http://www.emacswiki.org/emacs/Evil
+(global-set-key (kbd "C-w") nil) ; disable "delete-word-backward)
+(global-set-key (kbd "C-w t") 'elscreen-create) ;create tab
+(global-set-key (kbd "C-w x") 'elscreen-kill) ;kill tab
+(global-set-key (kbd "C-<left>") 'elscreen-previous) ;previous tab
+(global-set-key (kbd "M-p") 'elscreen-previous) ;previous tab
+(global-set-key (kbd "C-<right>") 'elscreen-next) ;next tab
+(global-set-key (kbd "M-n") 'elscreen-next) ;next tab
 
-(load "elscreen" "ElScreen" t)
-(define-key evil-normal-state-map (kbd "C-w t") 'elscreen-create) ;create tab
-(define-key evil-normal-state-map (kbd "C-w x") 'elscreen-kill) ;kill tab
-(define-key evil-normal-state-map (kbd "M-p") 'elscreen-previous) ;previous tab
-(define-key evil-normal-state-map (kbd "M-n") 'elscreen-next) ;next tab
+; (define-key evil-normal-state-map (kbd "C-w t") 'elscreen-create) ;create tab
+; (define-key evil-normal-state-map (kbd "C-w x") 'elscreen-kill) ;kill tab
+; (define-key evil-normal-state-map (kbd "M-p") 'elscreen-previous) ;previous tab
+; (define-key evil-normal-state-map (kbd "M-n") 'elscreen-next) ;next tab
+
 (load "~/.emacs.d/sublime-theme.el")
 (setq evil-default-cursor t)
 (sublime-text-2)
@@ -60,6 +71,7 @@
 ;; other random stuff
 
 (linum-mode 1)
+(global-linum-mode 1)
 (setq-default indent-tabs-mode nil)
 (require 'git-gutter-fringe)
 
@@ -81,3 +93,40 @@
       smtpmail-local-domain "jaredforsyth.com")
 
 (setq gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
+
+;; lisp editing
+
+(show-paren-mode 1)
+(setq show-paren-style 'parenthesis)
+
+;; get the server running
+(require 'server)
+(unless (and (fboundp 'server-running-p)
+	     (server-running-p))
+  (server-start))
+
+;; shell
+
+(defun my-comint-init ()
+  (setq comint-process-echoes t))
+(add-hook 'comint-mode-hook 'my-comint-init)
+
+;; org mode stuff
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(indent-tabs-mode nil)
+ '(inhibit-startup-screen t)
+ '(initial-major-mode (quote org-mode))
+ '(standard-indent 2)
+ '(tab-always-indent (quote complete)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
