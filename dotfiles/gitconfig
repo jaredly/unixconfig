@@ -23,3 +23,5 @@
 	ui = true
 [push]
 	default = simple
+[credential]
+	helper = cache --timeout=10600

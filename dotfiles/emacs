@@ -50,9 +50,13 @@
 ; (define-key evil-normal-state-map (kbd "M-p") 'elscreen-previous) ;previous tab
 ; (define-key evil-normal-state-map (kbd "M-n") 'elscreen-next) ;next tab
 
-(load "~/.emacs.d/sublime-theme.el")
+; (load "~/.emacs.d/sublime-theme.el")
 (setq evil-default-cursor t)
-(sublime-text-2)
+; (sublime-text-2)
+(color-theme-initialize)
+(if (display-graphic-p)
+    (color-theme-solarized-dark)
+    (color-theme-solarized-light))
 
 ;; smooth scrolling
 ;;   http://www.emacswiki.org/emacs/SmoothScrolling
@@ -119,9 +123,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote ("81936f208fbb93c5770f8303890e534fd5764507eb7b62d00b3c3c21adbdb41a" default)))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-major-mode (quote org-mode))
+ '(org-startup-indented t)
  '(standard-indent 2)
  '(tab-always-indent (quote complete)))
 (custom-set-faces
