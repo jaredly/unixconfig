@@ -52,7 +52,7 @@ alias lsa='ls -ld .*'
 
 bindkey -v
 
-export PATH=$PATH:~/.local/bin
+export PATH=~/bin:~/.local/bin:$PATH
 export PYTHONPATH=$PYTHONPATH:~/python
 
 bindkey ^r history-incremental-search-backward
@@ -89,10 +89,8 @@ export ALTERNATE_EDITOR=''
 
 if [[ `uname` == 'Linux' ]]; then
     . ~/.nvm/nvm.sh 2>&/dev/null
-    alias emacs='emacsclient -t'
+    alias emacs='emacsclient -n'
     alias e=emacs
-    alias vi=emacs
-    alias vim=emacs
 fi
 
 if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch mac
