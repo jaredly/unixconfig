@@ -45,20 +45,23 @@
 (global-set-key (kbd "C-<right>") 'elscreen-next) ;next tab
 (global-set-key (kbd "M-n") 'elscreen-next) ;next tab
 
-; (define-key evil-normal-state-map (kbd "C-w t") 'elscreen-create) ;create tab
+(define-key evil-normal-state-map (kbd "C-w") nil) ;create tab
+(define-key evil-normal-state-map (kbd "C-w t") 'elscreen-create) ;create tab
+(define-key evil-insert-state-map (kbd "C-w") nil) ;create tab
+(define-key evil-insert-state-map (kbd "C-w t") 'elscreen-create) ;create tab
 ; (define-key evil-normal-state-map (kbd "C-w x") 'elscreen-kill) ;kill tab
 ; (define-key evil-normal-state-map (kbd "M-p") 'elscreen-previous) ;previous tab
 ; (define-key evil-normal-state-map (kbd "M-n") 'elscreen-next) ;next tab
 
-(load "~/.emacs.d/sublime-theme.el")
+; (load "~/.emacs.d/sublime-theme.el")
 (setq evil-default-cursor t)
-(sublime-text-2)
+; (sublime-text-2)
 
 ;; smooth scrolling
 ;;   http://www.emacswiki.org/emacs/SmoothScrolling
     
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-scroll-amount '(2 ((shift) . 2))) ;; one line at a time
+; (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 (setq scroll-margin 1
@@ -72,7 +75,15 @@
 
 (linum-mode 1)
 (global-linum-mode 1)
+
+;; indents !! all over
 (setq-default indent-tabs-mode nil)
+(setq-default css-indent-offset 2)
+(setq-default js-indent-offset 2)
+(setq-default sgml-basic-offset 2)
+(setq-default c-basic-offset 2)
+
+
 (require 'git-gutter-fringe)
 
 (setq vc-follow-symlinks t)
@@ -114,6 +125,11 @@
 ;; org mode stuff
 
 
+;; FamilySearch stuff
+
+(setq auto-mode-alist (cons '("\\.ejs$" . html-mode) auto-mode-alist))
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -130,3 +146,41 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+; (color-theme-initalize)
+; (color-theme-solarized-dark)
+
+; Either close the current elscreen, or if only one screen, use the ":q" Evil
+; command; this simulates the ":q" behavior of Vim when used with tabs.
+(defun vimlike-quit ()
+  "Vimlike ':q' behavior: close current window if there are split windows;
+otherwise, close current tab (elscreen)."
+  (interactive)
+  (let ((one-elscreen (elscreen-one-screen-p))
+        (one-window (one-window-p))
+        )
+    (cond
+     ; if current tab has split windows in it, close the current live window
+     ((not one-window)
+      (delete-window) ; delete the current window
+      (balance-windows) ; balance remaining windows
+      nil)
+     ; if there are multiple elscreens (tabs), close the current elscreen
+     ((not one-elscreen)
+      (elscreen-kill)
+      nil)
+     ; if there is only one elscreen, just try to quit (calling elscreen-kill
+     ; will not work, because elscreen-kill fails if there is only one
+     ; elscreen)
+     (one-elscreen
+      (evil-quit)
+      nil)
+     )))
+
+(evil-ex-define-cmd "q" 'vimlike-quit)
+(evil-ex-define-cmd "tabn[ew]" 'elscreen-create)
+
+;; fixing mac :)
+(setq mac-option-modifier 'super)
+(setq mac-command-modifier 'meta)
+(setq mac-control-modifier 'control)
