@@ -1,4 +1,8 @@
+revive
+php+-mode
+jade-mode
 color-theme-solarized
+coffee-mode
 tabbar
 elscreen
 icicles
