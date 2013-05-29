@@ -12,8 +12,11 @@
 	editor = vim
 [alias]
     st = status
+    s = status
     c = commit
     p = pull
+    b = branch
+    co = checkout
 
 
 [colors]

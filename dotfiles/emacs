@@ -45,8 +45,8 @@
 (global-set-key (kbd "C-<right>") 'elscreen-next) ;next tab
 (global-set-key (kbd "M-n") 'elscreen-next) ;next tab
 
-; (define-key evil-normal-state-map (kbd "C-w t") 'elscreen-create) ;create tab
-; (define-key evil-normal-state-map (kbd "C-w x") 'elscreen-kill) ;kill tab
+(define-key evil-normal-state-map (kbd "C-w t") 'elscreen-create) ;create tab
+(define-key evil-normal-state-map (kbd "C-w x") 'elscreen-kill) ;kill tab
 ; (define-key evil-normal-state-map (kbd "M-p") 'elscreen-previous) ;previous tab
 ; (define-key evil-normal-state-map (kbd "M-n") 'elscreen-next) ;next tab
 
