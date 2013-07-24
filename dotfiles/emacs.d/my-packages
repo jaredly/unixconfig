@@ -1,6 +1,8 @@
 less-css-mode
-less-css-mode
 git-blame
+yaml-mode
+jinja2-mode
+stylus-mode
 revive
 php+-mode
 jade-mode
