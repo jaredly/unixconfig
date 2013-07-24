@@ -90,7 +90,6 @@ bindkey -k k9 title
 bindkey -k F1 prev
 bindkey -k F2 next
 
-shell -zsh
 vbell off
 
 defscrollback 5000

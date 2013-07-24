@@ -10,7 +10,16 @@ compinit
 #allow tab completion in the middle of a word
 setopt COMPLETE_IN_WORD
 
+if [ "$DISABLE_AUTO_UPDATE" != "true" ]
+then
+    /usr/bin/env ZSH=$ZSH DISABLE_UPDATE_PROMPT=$DISABLE_UPDATE_PROMPT zsh $ZSH/tools/check_for_upgrade.sh
+fi
+
 export PS1="${WINDOW}:%~$ "
+
+export DEFAULT_USER="jared"
+source ~/config/lib/agnoster.zsh-theme
+
 
 ## keep background processes at full speed
 #setopt NOBGNICE
@@ -101,13 +110,14 @@ if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch m
     export PATH="/usr/local/heroku/bin:$PATH"
     export PATH=$PATH:/Users/jared/pear/bin/
 
-    alias emacs="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t"
-    alias rvim=/usr/bin/vim
+    alias emacs="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -n"
     alias vi=emacs
     alias e=emacs
     alias jenkins='java -jar ~/bin/jenkins-cli.jar -s http://ec2-174-129-97-38.compute-1.amazonaws.com:8080/'
     alias sauce='java -jar ~/Downloads/Sauce-Connect-latest/Sauce-Connect.jar jabapyth d99b97a7-abce-4d5a-bdf2-0581775bcdfe'
 fi
+
+alias ip=ipython
 
 . ~/.venv/default/bin/activate
 
