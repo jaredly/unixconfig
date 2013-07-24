@@ -45,6 +45,7 @@ preexec () {
 if [[ `uname` == 'Darwin' ]]; then
     alias ls='ls -GF'
 else
+    alias open='google-chrome'
     alias ls='ls --color=auto -F'
 fi
 alias lsd='ls -ld *(-/DN)'

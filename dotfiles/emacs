@@ -10,6 +10,8 @@
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
+(require 'php+-mode)
+
 ;; install my packages =)
 
 (setq my-packages-file "~/.emacs.d/my-packages")
@@ -148,6 +150,7 @@
  '(initial-major-mode (quote org-mode))
  '(org-startup-indented t)
  '(standard-indent 2)
+ '(js-indent-level 2)
  '(tab-always-indent (quote complete)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -187,9 +190,18 @@ otherwise, close current tab (elscreen)."
      )))
 
 (evil-ex-define-cmd "q" 'vimlike-quit)
-(evil-ex-define-cmd "tabn[ew]" 'elscreen-create)
+(evil-ex-define-cmd "tn[ew]" 'elscreen-create)
 
 ;; fixing mac :)
 (setq mac-option-modifier 'super)
 (setq mac-command-modifier 'meta)
 (setq mac-control-modifier 'control)
+;; Save all tempfiles in $TMPDIR/emacs$UID/
+
+(defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
+(setq backup-directory-alist
+      `((".*" . ,emacs-tmp-dir)))
+(setq auto-save-file-name-transforms
+      `((".*" ,emacs-tmp-dir t)))
+(setq auto-save-list-file-prefix
+      emacs-tmp-dir)
