@@ -40,10 +40,14 @@
 (global-set-key (kbd "C-w") nil) ; disable "delete-word-backward)
 (global-set-key (kbd "C-w t") 'elscreen-create) ;create tab
 (global-set-key (kbd "C-w x") 'elscreen-kill) ;kill tab
+(global-set-key (kbd "C-d") 'scroll-up-command) ;kill tab
+(global-set-key (kbd "C-u") 'scroll-down-command) ;kill tab
 (global-set-key (kbd "C-<left>") 'elscreen-previous) ;previous tab
 (global-set-key (kbd "M-p") 'elscreen-previous) ;previous tab
 (global-set-key (kbd "C-<right>") 'elscreen-next) ;next tab
-(global-set-key (kbd "M-n") 'elscreen-next) ;next tab
+
+; actually I want this to be "new window"
+(global-set-key (kbd "M-n") 'new-frame) ;next tab
 
 (define-key evil-normal-state-map (kbd "C-w") nil) ;create tab
 (define-key evil-normal-state-map (kbd "C-w t") 'elscreen-create) ;create tab
@@ -85,7 +89,7 @@
 ;; indents !! all over
 (setq-default indent-tabs-mode nil)
 (setq-default css-indent-offset 2)
-(setq-default js-indent-offset 2)
+(setq-default js-indent-level 2)
 (setq-default sgml-basic-offset 2)
 (setq-default c-basic-offset 2)
 
@@ -141,12 +145,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote ("81936f208fbb93c5770f8303890e534fd5764507eb7b62d00b3c3c21adbdb41a" default)))
+ '(custom-safe-themes (quote ("81936f208fbb93c5770f8303890e534fd5764507eb7b62d00b3c3c21adbdb41a" default)))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-major-mode (quote org-mode))
  '(org-startup-indented t)
+ '(require-final-newline nil)
  '(standard-indent 2)
  '(tab-always-indent (quote complete)))
 (custom-set-faces
@@ -158,6 +162,34 @@
 
 ; (color-theme-initalize)
 ; (color-theme-solarized-dark)
+
+; Either close the current elscreen, or if only one screen, use the ":wq" Evil
+; command; this simulates the ":wq" behavior of Vim when used with tabs.
+(defun vimlike-write-quit ()
+  "Vimlike ':q' behavior: close current window if there are split windows;
+otherwise, close current tab (elscreen)."
+  (interactive)
+  (let ((one-elscreen (elscreen-one-screen-p))
+        (one-window (one-window-p))
+        )
+    (save-buffer)
+    (cond
+     ; if current tab has split windows in it, close the current live window
+     ((not one-window)
+      (delete-window) ; delete the current window
+      (balance-windows) ; balance remaining windows
+      nil)
+     ; if there are multiple elscreens (tabs), close the current elscreen
+     ((not one-elscreen)
+      (elscreen-kill)
+      nil)
+     ; if there is only one elscreen, just try to quit (calling elscreen-kill
+     ; will not work, because elscreen-kill fails if there is only one
+     ; elscreen)
+     (one-elscreen
+      (evil-quit)
+      nil)
+     )))
 
 ; Either close the current elscreen, or if only one screen, use the ":q" Evil
 ; command; this simulates the ":q" behavior of Vim when used with tabs.
@@ -187,9 +219,19 @@ otherwise, close current tab (elscreen)."
      )))
 
 (evil-ex-define-cmd "q" 'vimlike-quit)
+(evil-ex-define-cmd "wq" 'vimlike-write-quit)
 (evil-ex-define-cmd "tabn[ew]" 'elscreen-create)
 
 ;; fixing mac :)
 (setq mac-option-modifier 'super)
 (setq mac-command-modifier 'meta)
 (setq mac-control-modifier 'control)
+
+(global-auto-revert-mode t)
+
+;; disable the bell!!!
+(setq ring-bell-function 'ignore)
+
+(when (eq system-type 'darwin)
+  (color-theme-initialize)
+  (color-theme-solarized-dark))
