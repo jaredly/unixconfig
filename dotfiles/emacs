@@ -145,12 +145,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("81936f208fbb93c5770f8303890e534fd5764507eb7b62d00b3c3c21adbdb41a" default)))
- '(indent-tabs-mode nil)
+ '(custom-safe-themes (quote ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fbe33ece6b624df616d576a6a339ef06d5b2a1ad512c9b4fb39029a7725310b9" default)))
  '(inhibit-startup-screen t)
  '(initial-major-mode (quote org-mode))
  '(org-startup-indented t)
- '(require-final-newline nil)
+ '(show-paren-mode t)
  '(standard-indent 2)
  '(tab-always-indent (quote complete)))
 (custom-set-faces
