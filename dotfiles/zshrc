@@ -4,6 +4,9 @@
 # functions, options, key bindings, etc.
 #
 
+export ZSH_THEME=lukerandall
+export ZSH=~/.oh-my-zsh
+
 autoload -U compinit
 compinit
 
@@ -18,7 +21,7 @@ fi
 export PS1="${WINDOW}:%~$ "
 
 export DEFAULT_USER="jared"
-source ~/config/lib/agnoster.zsh-theme
+## source ~/config/lib/agnoster.zsh-theme
 
 
 ## keep background processes at full speed
@@ -127,3 +130,5 @@ function chpwd() {
     emulate -L zsh
     ls -a
 }
+
+. $ZSH/oh-my-zsh.sh
