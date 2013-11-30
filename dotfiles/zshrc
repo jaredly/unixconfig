@@ -92,8 +92,8 @@ _make_pbj() {
 compctl -K _make_pbj ./make.pbj
 alias pbj="./make.pbj"
 export PATH="/usr/local/heroku/bin:$PATH"
-export PATH="$PATH:/usr/local/go/bin"
 export GOPATH='/home/jared/go'
+export PATH="$PATH:/usr/local/go/bin:/home/jared/go/bin"
 export PATH=$PATH:$GOPATH/bin
 export JAVA_HOME=/usr/lib/jvm/java
 
@@ -120,6 +120,7 @@ if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch m
 fi
 
 alias ip=ipython
+export GOPATH=/home/jared/go
 
 [[ -s ~/.venv/default/bin/activate ]] && . ~/.venv/default/bin/activate
 
@@ -134,3 +135,4 @@ export ZSH_THEME=gallifrey
 
 [[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh 2>&/dev/null
 
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
