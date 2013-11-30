@@ -93,7 +93,7 @@ compctl -K _make_pbj ./make.pbj
 alias pbj="./make.pbj"
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
-export GOPATH='/home/jared/clone/go'
+export GOPATH='/home/jared/go'
 export PATH=$PATH:$GOPATH/bin
 export JAVA_HOME=/usr/lib/jvm/java
 
@@ -101,14 +101,12 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 export ALTERNATE_EDITOR=''
 
 if [[ `uname` == 'Linux' ]]; then
-    . ~/.nvm/nvm.sh 2>&/dev/null
     alias emacs='emacsclient -n'
     alias e=emacs
 fi
 
 if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch mac
     export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages
-    [[ -s /Users/jared/.nvm/nvm.sh ]] && . /Users/jared/.nvm/nvm.sh
     alias fs='foreman start'
     ### Added by the Heroku Toolbelt
     export PATH="/usr/local/heroku/bin:$PATH"
@@ -123,7 +121,7 @@ fi
 
 alias ip=ipython
 
-. ~/.venv/default/bin/activate
+[[ -s ~/.venv/default/bin/activate ]] && . ~/.venv/default/bin/activate
 
 # always run ls after cd
 function chpwd() {
@@ -131,4 +129,8 @@ function chpwd() {
     ls -a
 }
 
+export ZSH_THEME=gallifrey
 . $ZSH/oh-my-zsh.sh
+
+[[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh 2>&/dev/null
+

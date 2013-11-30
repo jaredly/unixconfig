@@ -143,16 +143,6 @@ set textwidth=78
 set formatoptions=cql
 
 let g:detectindent_preferred_expandtab = 1
-let domainname = substitute(system("hostname -d"),"\n","","g")
-if domainname == "corp.google.com"
-    " Use 2 spaces when you hit the tab key.
-    set et sw=2 sts=2
-    let g:detectindent_preferred_indent = 2
-else
-    " Use 4 spaces when you hit the tab key.
-    set et sw=4 sts=4
-    let g:detectindent_preferred_indent = 4
-endif
 "no stupid tab-space mixing in indents
 set shiftround
 autocmd BufReadPost <buffer> DetectIndent
