@@ -94,6 +94,7 @@ alias pbj="./make.pbj"
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$PATH"
 export GOPATH="~/go"
+export PATH="$PATH:/usr/local/go/bin:/home/jared/go/bin"
 export PATH=$PATH:$GOPATH/bin
 export JAVA_HOME=/usr/lib/jvm/java
 
@@ -135,3 +136,5 @@ function chpwd() {
 }
 
 . $ZSH/oh-my-zsh.sh
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
