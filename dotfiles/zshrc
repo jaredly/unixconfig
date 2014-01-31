@@ -92,12 +92,12 @@ _make_pbj() {
 compctl -K _make_pbj ./make.pbj
 alias pbj="./make.pbj"
 export PATH="/usr/local/heroku/bin:$PATH"
-export PATH="$PATH:/usr/local/go/bin"
-export GOPATH='/home/jared/clone/go'
+export PATH="$PATH"
+export GOPATH="~/go"
 export PATH=$PATH:$GOPATH/bin
 export JAVA_HOME=/usr/lib/jvm/java
 
-export VIRTUAL_ENV_DISABLE_PROMPT=1
+# export VIRTUAL_ENV_DISABLE_PROMPT=1
 export ALTERNATE_EDITOR=''
 
 if [[ `uname` == 'Linux' ]]; then
@@ -122,8 +122,11 @@ if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch m
 fi
 
 alias ip=ipython
+alias m='mocha -R spec'
+alias j='jshint --verbose'
+alias ja='j *.js lib test'
 
-. ~/.venv/default/bin/activate
+# . ~/.venv/default/bin/activate
 
 # always run ls after cd
 function chpwd() {
