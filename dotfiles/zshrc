@@ -119,6 +119,9 @@ if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch m
     alias sauce='java -jar ~/Downloads/Sauce-Connect-latest/Sauce-Connect.jar jabapyth d99b97a7-abce-4d5a-bdf2-0581775bcdfe'
 fi
 
+alias j='jshint --verbose'
+alias ja='j lib *.js'
+alias m='mocha -R spec'
 alias ip=ipython
 export GOPATH=/home/jared/go
 
