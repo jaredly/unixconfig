@@ -92,12 +92,12 @@ _make_pbj() {
 compctl -K _make_pbj ./make.pbj
 alias pbj="./make.pbj"
 export PATH="/usr/local/heroku/bin:$PATH"
-export GOPATH='/home/jared/go'
+export GOPATH="~/go"
 export PATH="$PATH:/usr/local/go/bin:/home/jared/go/bin"
 export PATH=$PATH:$GOPATH/bin
 export JAVA_HOME=/usr/lib/jvm/java
 
-export VIRTUAL_ENV_DISABLE_PROMPT=1
+# export VIRTUAL_ENV_DISABLE_PROMPT=1
 export ALTERNATE_EDITOR=''
 
 if [[ `uname` == 'Linux' ]]; then
@@ -123,9 +123,11 @@ alias j='jshint --verbose'
 alias ja='j lib *.js'
 alias m='mocha -R spec'
 alias ip=ipython
-export GOPATH=/home/jared/go
+alias m='mocha -R spec'
+alias j='jshint --verbose'
+alias ja='j *.js lib test'
 
-[[ -s ~/.venv/default/bin/activate ]] && . ~/.venv/default/bin/activate
+# [[ -s ~/.venv/default/bin/activate ]] && . ~/.venv/default/bin/activate
 
 # always run ls after cd
 function chpwd() {
