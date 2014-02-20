@@ -126,6 +126,8 @@ alias ip=ipython
 alias m='mocha -R spec'
 alias j='jshint --verbose'
 alias ja='j . lib test'
+alias vs='vim --servername'
+
 export GOPATH=/home/jared/go
 # always run ls after cd
 function chpwd() {

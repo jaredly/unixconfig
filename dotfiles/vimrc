@@ -185,8 +185,8 @@ au BufNewFile,BufRead *.rst set sw=2
 
 au BufNewFile,BufRead *.pbj set filetype=python
 
-map <C-p> :tabprevious<CR>
-map <C-j> :tabnew<CR>
+noremap <C-p> :tabprevious<CR>
+noremap <C-j> :tabnew<CR>
 inoremap <C-j> :tabnew<CR>
 noremap <C-t> :tabnew<CR>
 map <C-n> :tabnext<CR>
@@ -222,6 +222,7 @@ set clipboard=unnamedplus
 map <Leader>f :NERDTreeToggle<CR>
 " vim: ts=8
 "
+"
 """"""""""""""""""""""
 " Vundle stuff
 
@@ -238,24 +239,41 @@ Bundle 'gmarik/vundle'
 "" My bundles here:
 ""
 "" original repos on GitHub
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'tpope/vim-rails.git'
-Bundle 'kien/ctrlp.vim'
-Bundle 'dkprice/vim-easygrep'
-" vim-scripts repos
-Bundle 'L9'
-Bundle 'FuzzyFinder'
-Bundle 'plasticboy/vim-markdown.git'
-"" non-GitHub repos
-Bundle 'git://git.wincent.com/command-t.git'
 
+" Big Picture
+Bundle 'xolox/vim-misc'
+Bundle 'xolox/vim-session'
+
+" Helpers
+Bundle 'scrooloose/syntastic'
+
+" Editing
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'tpope/vim-surround'
+" Bundle 'msanders/snipmate.vim'
+
+" Git
+Bundle 'airblade/vim-gitgutter'
+Bundle 'tpope/vim-fugitive'
+
+" Navigation
+Bundle 'kien/ctrlp.vim'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'dkprice/vim-easygrep'
+
+" Syntax
+Bundle 'plasticboy/vim-markdown.git'
 Bundle "pangloss/vim-javascript"
 Bundle 'jsx/jsx.vim.git'
 Bundle 'groenewege/vim-less'
-Bundle 'plasticboy/vim-markdown'
 Bundle 'JuliaLang/julia-vim'
+
+" vim-scripts repos
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+"" non-GitHub repos
 
 filetype plugin indent on     " required!
 set autochdir
@@ -263,3 +281,8 @@ set fo+=t
 
 map <Leader>p :CtrlP<CR>
 let g:ctrlp_map = '<Leader-p>'
+let g:session_autosave = 'yes'
+let g:session_autosave_periodic = 10
+
+set number
+highlight LineNr term=bold cterm=NONE ctermfg=Green ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
