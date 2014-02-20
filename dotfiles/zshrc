@@ -92,23 +92,21 @@ _make_pbj() {
 compctl -K _make_pbj ./make.pbj
 alias pbj="./make.pbj"
 export PATH="/usr/local/heroku/bin:$PATH"
+export GOPATH="~/go"
 export PATH="$PATH:/usr/local/go/bin:/home/jared/go/bin"
-export GOPATH='/home/jared/clone/go'
 export PATH=$PATH:$GOPATH/bin
 export JAVA_HOME=/usr/lib/jvm/java
 
-export VIRTUAL_ENV_DISABLE_PROMPT=1
+# export VIRTUAL_ENV_DISABLE_PROMPT=1
 export ALTERNATE_EDITOR=''
 
 if [[ `uname` == 'Linux' ]]; then
-    . ~/.nvm/nvm.sh 2>&/dev/null
     alias emacs='emacsclient -n'
     alias e=vim
 fi
 
 if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch mac
     export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages
-    [[ -s /Users/jared/.nvm/nvm.sh ]] && . /Users/jared/.nvm/nvm.sh
     alias fs='foreman start'
     ### Added by the Heroku Toolbelt
     export PATH="/usr/local/heroku/bin:$PATH"
@@ -121,18 +119,23 @@ if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch m
     alias sauce='java -jar ~/Downloads/Sauce-Connect-latest/Sauce-Connect.jar jabapyth d99b97a7-abce-4d5a-bdf2-0581775bcdfe'
 fi
 
+alias j='jshint --verbose'
+alias ja='j lib *.js'
+alias m='mocha -R spec'
 alias ip=ipython
 alias m='mocha -R spec'
 alias j='jshint --verbose'
 alias ja='j . lib test'
 export GOPATH=/home/jared/go
-
 # always run ls after cd
 function chpwd() {
     emulate -L zsh
     ls -a
 }
 
+export ZSH_THEME=gallifrey
 . $ZSH/oh-my-zsh.sh
+
+[[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh 2>&/dev/null
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

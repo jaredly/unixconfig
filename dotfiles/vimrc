@@ -143,16 +143,6 @@ set textwidth=78
 set formatoptions=cql
 
 let g:detectindent_preferred_expandtab = 1
-let domainname = substitute(system("hostname -d"),"\n","","g")
-if domainname == "corp.google.com"
-    " Use 2 spaces when you hit the tab key.
-    set et sw=2 sts=2
-    let g:detectindent_preferred_indent = 2
-else
-    " Use 4 spaces when you hit the tab key.
-    set et sw=4 sts=4
-    let g:detectindent_preferred_indent = 4
-endif
 "no stupid tab-space mixing in indents
 set shiftround
 autocmd BufReadPost <buffer> DetectIndent
@@ -235,19 +225,19 @@ map <Leader>f :NERDTreeToggle<CR>
 """"""""""""""""""""""
 " Vundle stuff
 
-
+"
 filetype off                  " required!
-
+"
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-
-" let Vundle manage Vundle
-" required! 
-Bundle 'gmarik/vundle'
-
-" My bundles here:
 "
-" original repos on GitHub
+"" let Vundle manage Vundle
+"" required! 
+Bundle 'gmarik/vundle'
+"
+"" My bundles here:
+""
+"" original repos on GitHub
 Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -257,8 +247,10 @@ Bundle 'dkprice/vim-easygrep'
 " vim-scripts repos
 Bundle 'L9'
 Bundle 'FuzzyFinder'
-" non-GitHub repos
+Bundle 'plasticboy/vim-markdown.git'
+"" non-GitHub repos
 Bundle 'git://git.wincent.com/command-t.git'
+
 Bundle "pangloss/vim-javascript"
 Bundle 'jsx/jsx.vim.git'
 Bundle 'groenewege/vim-less'
@@ -269,4 +261,5 @@ filetype plugin indent on     " required!
 set autochdir
 set fo+=t
 
-let g:ctrlp_map = '<c-f>'
+map <Leader>p :CtrlP<CR>
+let g:ctrlp_map = '<Leader-p>'
