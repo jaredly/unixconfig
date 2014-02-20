@@ -103,7 +103,7 @@ export ALTERNATE_EDITOR=''
 if [[ `uname` == 'Linux' ]]; then
     . ~/.nvm/nvm.sh 2>&/dev/null
     alias emacs='emacsclient -n'
-    alias e=emacs
+    alias e=vim
 fi
 
 if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch mac
@@ -116,15 +116,16 @@ if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch m
 
     alias emacs="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -n"
     alias vi=emacs
-    alias e=emacs
+    alias e=vim
     alias jenkins='java -jar ~/bin/jenkins-cli.jar -s http://ec2-174-129-97-38.compute-1.amazonaws.com:8080/'
     alias sauce='java -jar ~/Downloads/Sauce-Connect-latest/Sauce-Connect.jar jabapyth d99b97a7-abce-4d5a-bdf2-0581775bcdfe'
 fi
 
 alias ip=ipython
+alias m='mocha -R spec'
+alias j='jshint --verbose'
+alias ja='j . lib test'
 export GOPATH=/home/jared/go
-
-. ~/.venv/default/bin/activate
 
 # always run ls after cd
 function chpwd() {

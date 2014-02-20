@@ -112,7 +112,7 @@ vnoremap p <Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fold Settings (note that files will default to all folds being open)
 set foldenable
-set foldlevelstart=0
+set foldlevelstart=20
 set foldopen=block,hor,jump,mark,percent,quickfix,search,tag,undo
 
 
@@ -175,7 +175,8 @@ autocmd FileType make setlocal noet sw=8 sts=8
 " Python Settings
 
 " Close foldlevels 1 and greater by default (jpythonfold.vim is in ftplugins)
-autocmd FileType python setlocal foldlevel=1
+" autocmd FileType python setlocal foldlevel=1
+autocmd FileType javascript setlocal sw=2 ts=2 et
 
 " default formatoptions is tcq
 autocmd FileType mail setlocal formatoptions=tcqbl
@@ -211,6 +212,9 @@ autocmd FileType coq noremap <C-j> :IDENext<CR>
 autocmd FileType coq noremap <C-k> :IDEUndo<CR>
 autocmd FileType coq noremap <C-k> :IDEUndo<CR>
 autocmd FileType coq highlight SentToCoq ctermbg=none ctermfg=black
+
+autocmd FileType javascript setlocal sw=2 ts=2 et
+autocmd FileType html setlocal sw=2 ts=2 et
 
 autocmd FileType go setlocal formatoptions+=cro
 
@@ -248,14 +252,21 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'tpope/vim-rails.git'
+Bundle 'kien/ctrlp.vim'
+Bundle 'dkprice/vim-easygrep'
 " vim-scripts repos
 Bundle 'L9'
 Bundle 'FuzzyFinder'
 " non-GitHub repos
 Bundle 'git://git.wincent.com/command-t.git'
-" Git repos on your local machine (i.e. when working on your own plugin)
-Bundle 'file:///Users/gmarik/path/to/plugin'
-" ...
+Bundle "pangloss/vim-javascript"
+Bundle 'jsx/jsx.vim.git'
+Bundle 'groenewege/vim-less'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'JuliaLang/julia-vim'
 
 filetype plugin indent on     " required!
 set autochdir
+set fo+=t
+
+let g:ctrlp_map = '<c-f>'
