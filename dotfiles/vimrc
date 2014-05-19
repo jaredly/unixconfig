@@ -239,40 +239,42 @@ Bundle 'gmarik/vundle'
 "" My bundles here:
 ""
 "" original repos on GitHub
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'tpope/vim-rails.git'
+" Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Bundle 'tpope/vim-rails.git'
 
 " Big Picture
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-session'
 
 " Helpers
-Bundle 'scrooloose/syntastic'
+" Bundle 'scrooloose/syntastic'
 
 " Editing
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'tpope/vim-surround'
+" Bundle 'tpope/vim-surround'
 " Bundle 'msanders/snipmate.vim'
 
 " Git
 Bundle 'airblade/vim-gitgutter'
-Bundle 'tpope/vim-fugitive'
+" Bundle 'tpope/vim-fugitive'
 
 " Navigation
-Bundle 'kien/ctrlp.vim'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'dkprice/vim-easygrep'
+" Bundle 'kien/ctrlp.vim'
+" Bundle 'Lokaltog/vim-easymotion'
+" Bundle 'dkprice/vim-easygrep'
 
 " Syntax
-Bundle 'plasticboy/vim-markdown.git'
+" Bundle 'plasticboy/vim-markdown.git'
 Bundle "pangloss/vim-javascript"
-Bundle 'jsx/jsx.vim.git'
+" Bundle 'jsx/jsx.vim.git'
 Bundle 'groenewege/vim-less'
-Bundle 'JuliaLang/julia-vim'
+" Bundle 'JuliaLang/julia-vim'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'wting/rust.vim'
 
 " vim-scripts repos
-Bundle 'L9'
-Bundle 'FuzzyFinder'
+" Bundle 'L9'
+" Bundle 'FuzzyFinder'
 "" non-GitHub repos
 
 filetype plugin indent on     " required!
