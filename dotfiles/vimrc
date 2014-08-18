@@ -166,7 +166,9 @@ autocmd FileType make setlocal noet sw=8 sts=8
 
 " Close foldlevels 1 and greater by default (jpythonfold.vim is in ftplugins)
 " autocmd FileType python setlocal foldlevel=1
-autocmd FileType javascript setlocal sw=2 ts=2 et
+autocmd FileType javascript setlocal sw=2 ts=2 et foldmethod=syntax
+
+au BufRead,BufNewFile /Users/khanintern1/khan/webapp/* setl sw=4 ts=4 et
 
 " default formatoptions is tcq
 autocmd FileType mail setlocal formatoptions=tcqbl
@@ -186,25 +188,30 @@ au BufNewFile,BufRead *.rst set sw=2
 au BufNewFile,BufRead *.pbj set filetype=python
 
 noremap <C-p> :tabprevious<CR>
-noremap <C-j> :tabnew<CR>
-inoremap <C-j> :tabnew<CR>
+" noremap <C-j> :tabnew<CR>
+" inoremap <C-j> :tabnew<CR>
 noremap <C-t> :tabnew<CR>
-map <C-n> :tabnext<CR>
+noremap <C-n> :tabnext<CR>
 inoremap <C-Left> <C-O>:tabprevious<CR>
 inoremap <C-Right> <C-O>:tabnext<CR>
 map <Leader>s :%s/\s\+$//g<CR>
 
-autocmd FileType coq inoremap <C-l> :IDEToCursor<CR>
-autocmd FileType coq inoremap <C-j> :IDENext<CR>
-autocmd FileType coq inoremap <C-k> :IDEUndo<CR>
-autocmd FileType coq noremap <C-l> :IDEToCursor<CR>
-autocmd FileType coq noremap <C-j> :IDENext<CR>
-autocmd FileType coq noremap <C-k> :IDEUndo<CR>
-autocmd FileType coq noremap <C-k> :IDEUndo<CR>
-autocmd FileType coq highlight SentToCoq ctermbg=none ctermfg=black
+noremap <C-l> :wincmd l<CR>
+noremap <C-h> :wincmd h<CR>
+noremap <C-j> :wincmd j<CR>
+noremap <C-k> :wincmd k<CR>
 
-autocmd FileType javascript setlocal sw=2 ts=2 et
-autocmd FileType html setlocal sw=2 ts=2 et
+" autocmd FileType coq inoremap <C-l> :IDEToCursor<CR>
+" autocmd FileType coq inoremap <C-j> :IDENext<CR>
+" autocmd FileType coq inoremap <C-k> :IDEUndo<CR>
+" autocmd FileType coq noremap <C-l> :IDEToCursor<CR>
+" autocmd FileType coq noremap <C-j> :IDENext<CR>
+" autocmd FileType coq noremap <C-k> :IDEUndo<CR>
+" autocmd FileType coq noremap <C-k> :IDEUndo<CR>
+" autocmd FileType coq highlight SentToCoq ctermbg=none ctermfg=black
+
+autocmd FileType javascript setlocal sw=4 ts=4 et
+autocmd FileType html setlocal sw=4 ts=4 et
 
 autocmd FileType go setlocal formatoptions+=cro
 
@@ -218,6 +225,9 @@ noremap <F1> <nop>
 set modeline
 
 set clipboard=unnamedplus
+
+noremap <C-n> :tabnext<CR>
+noremap <F2> :nohl<CR>
 
 map <Leader>f :NERDTreeToggle<CR>
 " vim: ts=8
@@ -250,27 +260,45 @@ Bundle 'xolox/vim-session'
 " Bundle 'scrooloose/syntastic'
 
 " Editing
-Bundle 'Valloric/YouCompleteMe'
-" Bundle 'tpope/vim-surround'
+" Bundle 'Valloric/YouCompleteMe'
+Bundle 'tpope/vim-surround'
 " Bundle 'msanders/snipmate.vim'
 
 " Git
 Bundle 'airblade/vim-gitgutter'
-" Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-fugitive'
 
 " Navigation
-" Bundle 'kien/ctrlp.vim'
+Bundle 'kien/ctrlp.vim'
+Bundle 'tacahiroy/ctrlp-funky'
+Bundle 'jasoncodes/ctrlp-modified.vim'
+" Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+" I don't use tagging atm
+"" Bundle 'ivalkeen/vim-ctrlp-tjump'
+"" Also not just about this sgur/ctrlp-extensions.vim
+
 " Bundle 'Lokaltog/vim-easymotion'
 " Bundle 'dkprice/vim-easygrep'
 
 " Syntax
-" Bundle 'plasticboy/vim-markdown.git'
+Bundle 'plasticboy/vim-markdown.git'
 Bundle "pangloss/vim-javascript"
 " Bundle 'jsx/jsx.vim.git'
 Bundle 'groenewege/vim-less'
 " Bundle 'JuliaLang/julia-vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'wting/rust.vim'
+Bundle 'marijnh/tern_for_vim'
+Bundle 'embear/vim-localvimrc'
+
+" CtrlP
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+map <Leader>p :CtrlP<CR>
+let g:ctrlp_map = '<Leader-p>'
+let g:ctrlp_funky_syntax_highlight = 1
+
+" Tmux stuff
+Bundle 'christoomey/vim-tmux-navigator'
 
 " vim-scripts repos
 " Bundle 'L9'
@@ -281,10 +309,16 @@ filetype plugin indent on     " required!
 set autochdir
 set fo+=t
 
-map <Leader>p :CtrlP<CR>
-let g:ctrlp_map = '<Leader-p>'
 let g:session_autosave = 'yes'
 let g:session_autosave_periodic = 10
 
 set number
 highlight LineNr term=bold cterm=NONE ctermfg=Green ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+
+" quick replace all the single quoted things
+noremap <Leader>s :%s/\(\W\)'\([^']*\)'/\1"\2"/gc<CR>
+
+noremap <C-n> :tabnext<CR>
+noremap <F2> :nohl<CR>
+
+

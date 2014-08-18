@@ -71,12 +71,24 @@ export PYTHONPATH=$PYTHONPATH:~/python
 bindkey ^r history-incremental-search-backward
 setopt hist_ignore_all_dups
 
-alias gits="git status|grep 'modified:\|deleted:'"
+alias gits="git status"
 alias gitsn="git status|grep 'Changed but not updated:' -A 1000|grep 'modified:\|deleted:'"
 alias gitn="git status|grep 'Untracked files:' -A 1000|grep ^#$'\t'|sed -e 's/^#\t//'"
 alias gitca="git commit -am"
 alias gitc="git commit -m"
 alias gitd='git diff'
+
+alias gc="git commit"
+alias gca="git commit -a"
+alias ga="git commit -a"
+alias gam="git commit --amend"
+alias gaam="git commit -a --amend"
+alias gad="git add"
+alias gd="git diff"
+alias gs="git status"
+alias gco="git checkout"
+alias g=git
+alias gpnp='git pull && git push'
 
 alias hs='hg st'
 alias hc='hg commit -m'
@@ -117,6 +129,15 @@ if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch m
     alias e=vim
     alias jenkins='java -jar ~/bin/jenkins-cli.jar -s http://ec2-174-129-97-38.compute-1.amazonaws.com:8080/'
     alias sauce='java -jar ~/Downloads/Sauce-Connect-latest/Sauce-Connect.jar jabapyth d99b97a7-abce-4d5a-bdf2-0581775bcdfe'
+fi
+
+if [[ `hostname` == 'Jared.local' ]]; then
+    if [[ `uname` == 'Darwin' ]]; then
+	export CPPFLAGS=-Qunused-arguments
+	export CFLAGS=-Qunused-arguments
+	export PATH=$PATH:$HOME/khan/devtools/arcanist/khan-bin
+	. ~/.virtualenv/khan27/bin/activate
+    fi
 fi
 
 alias j='jshint --verbose'
