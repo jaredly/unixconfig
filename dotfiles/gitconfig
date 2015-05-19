@@ -18,6 +18,7 @@
     p = pull
     b = branch
     co = checkout
+    su = submodule update --init --recursive
 
 
 [colors]
@@ -31,3 +32,6 @@
 	helper = cache --timeout=10600
 [web]
 	browser = xdg-open
+
+[include]
+	path = ~/.gitconfig.khan
