@@ -74,8 +74,7 @@ if [[ `uname` == 'Darwin' ]]; then
     alias ls='ls -GF'
     export CPPFLAGS=-Qunused-arguments
     export CFLAGS=-Qunused-arguments
-    export PATH=$PATH:$HOME/khan/devtools/arcanist/khan-bin
-    . ~/.virtualenv/khan27/bin/activate
+    # export PATH=$PATH:$HOME/khan/devtools/arcanist/khan-bin
 else
     alias open='google-chrome'
     alias ls='ls --color=auto -F'
@@ -131,5 +130,5 @@ preexec () {
     fi
 }
 
-. ~/.nvm/nvm.sh
-
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
