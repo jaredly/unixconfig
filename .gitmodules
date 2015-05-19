@@ -1,3 +1,9 @@
 [submodule "dotfiles/zprezto"]
 	path = dotfiles/zprezto
 	url = https://github.com/jaredly/prezto.git
+[submodule "dotfiles/vim/bundle/jshint.vim"]
+	path = dotfiles/vim/bundle/jshint.vim
+	url = https://github.com/wookiehangover/jshint.vim.git
+[submodule "dotfiles/vim/bundle/nerdtree"]
+	path = dotfiles/vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree
