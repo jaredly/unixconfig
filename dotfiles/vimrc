@@ -172,6 +172,8 @@ autocmd FileType make setlocal noet sw=8 sts=8
 autocmd FileType javascript setlocal sw=2 ts=2 et foldmethod=syntax
 autocmd FileType markdown setlocal sw=2 ts=2 et
 
+au BufRead,BufNewFile *.shade setl filetype=c sw=4 ts=4 et
+
 au BufRead,BufNewFile /Users/khanintern1/khan/webapp/* setl sw=4 ts=4 et
 
 " default formatoptions is tcq
@@ -246,61 +248,65 @@ map <Leader>f :NERDTreeToggle<CR>
 "
 filetype off                  " required!
 "
-set rtp+=~/.vim/bundle/vundle.vim/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 "
 "" let Vundle manage Vundle
 "" required! 
-"" Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 "
 "" My bundles here:
 ""
 "" original repos on GitHub
 
-" Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Bundle 'tpope/vim-rails.git'
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Plugin 'tpope/vim-rails.git'
 
 " Big Picture
-Bundle 'xolox/vim-misc'
-Bundle 'xolox/vim-session'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
 
 " Helpers
-"" Bundle 'scrooloose/syntastic'
+"" Plugin 'scrooloose/syntastic'
 
 " Editing
-"" Bundle 'Valloric/YouCompleteMe'
-Bundle 'tpope/vim-surround'
-Bundle 'msanders/snipmate.vim'
+"" Plugin 'Valloric/YouCompleteMe'
+Plugin 'tpope/vim-surround'
+Plugin 'msanders/snipmate.vim'
 
 " Git
-" Bundle 'airblade/vim-gitgutter'
-" Bundle 'tpope/vim-fugitive'
+" Plugin 'airblade/vim-gitgutter'
+" Plugin 'tpope/vim-fugitive'
 
 " Navigation
-Bundle 'kien/ctrlp.vim'
-Bundle 'tacahiroy/ctrlp-funky'
-Bundle 'jasoncodes/ctrlp-modified.vim'
-" Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'jasoncodes/ctrlp-modified.vim'
+" Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 " I don't use tagging atm
-"" Bundle 'ivalkeen/vim-ctrlp-tjump'
+"" Plugin 'ivalkeen/vim-ctrlp-tjump'
 "" Also not just about this sgur/ctrlp-extensions.vim
 
-" Bundle 'Lokaltog/vim-easymotion'
-" Bundle 'dkprice/vim-easygrep'
+" Plugin 'Lokaltog/vim-easymotion'
+" Plugin 'dkprice/vim-easygrep'
 
 " Syntax
-Bundle 'plasticboy/vim-markdown.git'
-Bundle "pangloss/vim-javascript"
-" Bundle 'jsx/jsx.vim.git'
-Bundle 'groenewege/vim-less'
-" Bundle 'JuliaLang/julia-vim'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'wting/rust.vim'
-" Bundle 'marijnh/tern_for_vim'
-Bundle 'embear/vim-localvimrc'
-Bundle 'lambdatoast/elm.vim'
-Bundle 'vim-scripts/PreserveNoEOL'
-Bundle 'AndrewRadev/linediff.vim'
+Plugin 'facebook/vim-flow'
+Plugin 'plasticboy/vim-markdown.git'
+Plugin 'pangloss/vim-javascript'
+" Plugin 'jsx/jsx.vim.git'
+Plugin 'groenewege/vim-less'
+" Plugin 'JuliaLang/julia-vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'wting/rust.vim'
+" Plugin 'marijnh/tern_for_vim'
+Plugin 'embear/vim-localvimrc'
+Plugin 'lambdatoast/elm.vim'
+Plugin 'vim-scripts/PreserveNoEOL'
+Plugin 'AndrewRadev/linediff.vim'
+Plugin 'FelikZ/ctrlp-py-matcher'
+Plugin 'phildawes/racer'
+" Plugin 'terryma/vim-multiple-cursors'
 
 let g:vim_markdown_initial_foldlevel = 20
 
@@ -309,16 +315,33 @@ nnoremap <Leader>fu :CtrlPFunky<Cr>
 map <Leader>p :CtrlP<CR>
 let g:ctrlp_map = '<Leader-p>'
 let g:ctrlp_funky_syntax_highlight = 1
+let g:ctrlp_max_files = 500000
+
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore "**/node_modules"
+      \ --ignore "**/*.xcassets"
+      \ --ignore "**/*.xcodeproj"
+      \ --ignore "**/*.xcworkspace"
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore "**/*.pyc"
+      \ -g ""'
+
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 " Tmux stuff
-Bundle 'christoomey/vim-tmux-navigator'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " vim-scripts repos
-" Bundle 'L9'
-" Bundle 'FuzzyFinder'
+" Plugin 'L9'
+" Plugin 'FuzzyFinder'
 "" non-GitHub repos
 
+call vundle#end()            " required
 filetype plugin indent on     " required!
+
 set autochdir
 set fo+=t
 
@@ -334,4 +357,8 @@ noremap <Leader>s :%s/\(\W\)'\([^']*\)'/\1"\2"/gc<CR>
 noremap <C-n> :tabnext<CR>
 noremap <F2> :nohl<CR>
 
+
+set hidden
+let g:racer_cmd = "/Users/jaredly/clone/fork/racer/target/release/racer"
+let $RUST_SRC_PATH="/Users/jaredly/clone/fork/racer/rustsrc/src/"
 

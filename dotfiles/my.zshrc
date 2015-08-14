@@ -71,6 +71,7 @@ export PATH=$PATH:$GOPATH/bin
 ##############################
 
 if [[ `uname` == 'Darwin' ]]; then
+    export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home
     alias ls='ls -GF'
     export CPPFLAGS=-Qunused-arguments
     export CFLAGS=-Qunused-arguments
@@ -132,3 +133,4 @@ preexec () {
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+. /Users/jaredly/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
