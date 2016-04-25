@@ -1,3 +1,6 @@
 [submodule "dotfiles/zprezto"]
 	path = dotfiles/zprezto
 	url = https://github.com/jaredly/prezto.git
+[submodule "dotfiles/vim/bundle/neobundle.vim"]
+	path = dotfiles/vim/bundle/neobundle.vim
+	url = https://github.com/Shougo/neobundle.vim

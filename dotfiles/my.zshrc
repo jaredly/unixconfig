@@ -3,10 +3,6 @@
 #### All of the aliai ####
 ##########################
 
-unalias rm
-unalias cp
-unalias mv
-
 alias lsd='ls -ld *(-/DN)'
 alias lsa='ls -ld .*'
 
@@ -18,24 +14,33 @@ alias gitc="git commit -m"
 alias gitd='git diff'
 
 alias g=git
-alias gm="git commit -m"
-alias gc="git commit"
-alias gca="git commit -a"
 alias ga="git commit -a"
-alias gam="git commit --amend"
 alias gaam="git commit -a --amend"
 alias gad="git add"
-alias gd="git diff"
-alias gs="git status"
+alias gam="git commit --amend"
+alias gb="git branch"
+alias gc="git commit"
+alias gca="git commit -a"
 alias gco="git checkout"
+alias gd="git diff"
+alias gm="git commit -m"
+alias gmt="git mergetool"
 alias gpnp='git pull && git push'
+alias gs="git status"
 alias gsu="git submodule update --init --recursive"
+alias gt="git t"
+alias gta="git ta"
+alias gtr="git tree"
 
 alias hs='hg st'
 alias hc='hg commit -m'
 alias hd='hg diff'
 alias hp='hg pull -u'
 alias ll="ls -l"
+alias la="ls -la"
+
+alias nv="nvim"
+alias vim="nvim"
 
 alias m='make'
 alias mkae=make
@@ -72,6 +77,7 @@ export PATH=$PATH:$GOPATH/bin
 
 if [[ `uname` == 'Darwin' ]]; then
     alias ls='ls -GF'
+    export JAVA_HOME=`/usr/libexec/java_home`
     export CPPFLAGS=-Qunused-arguments
     export CFLAGS=-Qunused-arguments
     export PATH=$PATH:$HOME/khan/devtools/arcanist/khan-bin
@@ -84,16 +90,6 @@ fi
 
 if [[ `hostname` =~ ".*aml.*" ]]; then
     alias vim=vimx
-fi
-
-if [[ `hostname` == 'jaredmac' ]]; then # all my settings for the familysearch mac
-    export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages
-    alias fs='foreman start'
-    ### Added by the Heroku Toolbelt
-    export PATH="/usr/local/heroku/bin:$PATH"
-    export PATH=$PATH:/Users/jared/pear/bin/
-    alias jenkins='java -jar ~/bin/jenkins-cli.jar -s http://ec2-174-129-97-38.compute-1.amazonaws.com:8080/'
-    alias sauce='java -jar ~/Downloads/Sauce-Connect-latest/Sauce-Connect.jar jabapyth d99b97a7-abce-4d5a-bdf2-0581775bcdfe'
 fi
 
 #######################
@@ -110,6 +106,12 @@ export ALTERNATE_EDITOR=''
 export DEFAULT_USER="jared"
 
 
+autoload -U compinit
+compinit
+
+export PS1="${WINDOW}:%~$ "
+export EDITOR=vim
+
 #allow tab completion in the middle of a word
 setopt COMPLETE_IN_WORD
 
@@ -122,6 +124,39 @@ bindkey "^[OA" up-line-or-beginning-search # Up
 bindkey "^[OB" down-line-or-beginning-search # Down
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
+bindkey "${terminfo[kpp]}" up-line-or-search
+bindkey "${terminfo[kpp]}" up-line-or-search
+bindkey "${terminfo[knp]}" down-line-or-search
+bindkey "${terminfo[knp]}" down-line-or-search
+
+bindkey -v
+bindkey ^r history-incremental-search-backward
+
+### Awesome history
+if [ -z "$HISTFILE" ]; then
+    HISTFILE=$HOME/.zsh_history
+fi
+
+HISTSIZE=10000
+SAVEHIST=10000
+
+# Show history
+case $HIST_STAMPS in
+    "mm/dd/yyyy") alias history='fc -fl 1' ;;
+    "dd.mm.yyyy") alias history='fc -El 1' ;;
+    "yyyy-mm-dd") alias history='fc -il 1' ;;
+    *) alias history='fc -l 1' ;;
+esac
+
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history # share command history data
+setopt hist_ignore_all_dups
 
 #### More 
 
@@ -131,5 +166,16 @@ preexec () {
     fi
 }
 
-. ~/.nvm/nvm.sh
+[[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh 2>&/dev/null
+. /Users/jared/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
+export PATH="/Users/jared/.multirust/bin:$PATH"
+
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/Users/jared/google-cloud-sdk/path.zsh.inc'
+
+# The next line enables shell command completion for gcloud.
+source '/Users/jared/google-cloud-sdk/completion.zsh.inc'
+
+# eval $(docker-machine env default)
